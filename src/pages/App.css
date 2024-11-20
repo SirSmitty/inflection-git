@@ -1,0 +1,413 @@
+.App {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.App-container {
+  position: relative;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.App-container.fade-out {
+  opacity: 0;
+  /* Fades out the container */
+  pointer-events: none;
+  /* Prevent interaction during fade-out */
+}
+
+
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -10;
+  /* Place the video behind other content */
+}
+
+.content-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+
+.content-container.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.App-content {
+  background-color: transparent;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-content h1 {
+  margin-top: 10px;
+  font-family: 'GTM';
+  font-size: 8rem;
+
+}
+
+.App-content .nav-link {
+  scale: 0.8;
+  margin-top: 5%;
+  opacity: 0.6;
+  font-family: 'RoobertoB';
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: white;
+  padding: 1rem 3rem;
+  border-radius: 15px;
+  border: white solid 2px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.App-content .nav-link:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.contact-page {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  /* Smooth fade effect */
+}
+
+.wordmark-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  /* Adds spacing below the row */
+}
+
+.wordmark-header img {
+  width: 10%;
+}
+
+.contact-page-content {
+  background-color: transparent;
+  min-height: auto;
+  width: 100vw;
+  margin-top: 5%;
+  display: flex;
+  overflow-x: hidden;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  /* Ensures spacing from screen edges */
+  box-sizing: border-box;
+  /* Include padding in the layout */
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.contact-page.show {
+  opacity: 1;
+  /* Fades in the contact page */
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 2rem;
+  /* Adds spacing below the row */
+}
+
+.form-footer {
+  padding-top: 3%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 2rem;
+  /* Adds spacing below the row */
+}
+
+.contact-title {
+  font-family: 'GTMI', serif;
+  font-weight: 100;
+  font-size: 3rem;
+  color: white;
+  margin: 0;
+  text-align: left;
+}
+
+.contact-form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-input {
+  flex: 1;
+  padding: 0.75rem;
+  font-family: 'RoobertoR';
+  font-size: 1rem;
+  border: 1px solid rgb(96, 179, 178, 0.5);
+
+  border-radius: 8px;
+  background-color: transparent;
+  color: white;
+  background-color: rgb(000, 000, 000, .2);
+}
+
+.contact-textarea-container {
+  width: 100%;
+  height: 250px;
+}
+
+.form-textarea {
+  height: 98%;
+  font-family: 'RoobertoR';
+  width: 98%;
+  padding-top: 2%;
+  padding-left: 2%;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: rgb(000, 000, 000, .2);
+  border: 1px solid rgb(96, 179, 178, 0.5);
+  color: white;
+  resize: none;
+}
+
+.submit-button {
+  width: auto;
+  /* Allow the button to shrink */
+  padding: 0.75rem 2rem;
+  font-size: 1.2rem;
+  color: black;
+  background-color: #60b3b2;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: right;
+}
+
+.submit-button:hover {
+  background-color: #ff8d5a;
+  transform: scale(1.05);
+}
+
+.bg-noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/noise.png');
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: -1;
+  animation: noise 0.2s infinite;
+  opacity: 0;
+  transition: opacity 700ms ease-in-out;
+  /* Easing effect */
+}
+
+.bg-noise.active {
+  opacity: 1;
+  /* Fades in when active */
+}
+
+.bg-dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Adjust transparency here */
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0;
+  /* Initially hidden */
+  transition: opacity 700ms ease-in-out;
+  /* Easing effect */
+}
+
+.bg-dark-overlay.active {
+  opacity: 1;
+}
+
+.new-site-announce {
+  position: relative;
+  margin-top: 3%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.scroll-wrapper {
+  display: flex;
+  width: max-content;
+  animation: scroll-text 10s linear infinite;
+}
+
+.new-site-announce p {
+  margin: 0;
+  /* Remove default margin */
+  padding: 0 2rem;
+  /* Add some spacing between repetitions */
+  font-size: 1.2rem;
+  color: white;
+}
+
+
+
+@keyframes noise {
+
+  0%,
+  100% {
+    background-position: 0 0;
+  }
+
+  10% {
+    background-position: -5% -10%;
+  }
+
+  20% {
+    background-position: -15% 5%;
+  }
+
+  30% {
+    background-position: 7% -25%;
+  }
+
+  40% {
+    background-position: 20% 25%;
+  }
+
+  50% {
+    background-position: -25% 10%;
+  }
+
+  60% {
+    background-position: 15% 5%;
+  }
+
+  70% {
+    background-position: 0 15%;
+  }
+
+  80% {
+    background-position: 25% 35%;
+  }
+
+  90% {
+    background-position: -10% 10%;
+  }
+
+}
+
+.status-message {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: white;
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.status-message p {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: white;
+}
+
+/* Optional fade-in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+
+  .wordmark-header img {
+    width: 40%;
+  }
+
+  .contact-page {
+    margin-top: 60px;
+  }
+
+  .contact-form {
+    width: 90%;
+  }
+
+  .form-header {
+    width: 80%;
+    justify-content: center;
+  }
+
+  .form-footer {
+    padding-top: 20px;
+    justify-content: center;
+  }
+
+  .App-content img {
+    width: 80%;
+  }
+
+  .App-content .nav-link {
+    scale: .8;
+  }
+
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .contact-title {
+    font-size: 2.5rem;
+  }
+
+  .form-input,
+  .form-textarea {
+    font-size: 0.9rem;
+  }
+
+  .submit-button {
+    font-size: 0.9rem;
+  }
+
+  .new-site-announce p {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+}
