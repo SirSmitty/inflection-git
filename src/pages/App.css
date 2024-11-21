@@ -271,7 +271,6 @@
   left: 0;
   width: 100%;
   text-align: center;
-  padding: 0 20px;
   overflow: hidden;
   white-space: nowrap;
   z-index: 10;
@@ -421,5 +420,12 @@
   .new-site-announce p {
     margin-top: 20px;
     font-size: 1rem;
+  }
+
+  .new-site-announce {
+    z-index: 1000;
+    position: absolute;
+    margin-top: 1rem;
+    padding: 0;
   }
 }
