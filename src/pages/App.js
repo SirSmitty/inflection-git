@@ -75,14 +75,17 @@ function App() {
 
       {/* Initial content container */}
       {!showContact && (
-        <div className={`content-container ${fadeOut ? 'fade-out' : ''}`}>
-          <div className="App-content">
-            <img src={homePageHeader} width={'30%'} height={'auto'} alt='HomeHeader' />
-            <button onClick={handleButtonClick} className="nav-link">
-              Enter Now
-            </button>
+        <>
+          <div className="bg-noise" style={{ opacity: '1' }}></div>
+          <div className={`content-container ${fadeOut ? 'fade-out' : ''}`}>
+            <div className="App-content">
+              <img src={homePageHeader} width={'30%'} height={'auto'} alt='HomeHeader' />
+              <button onClick={handleButtonClick} className="nav-link">
+                Enter Now
+              </button>
+            </div>
           </div>
-        </div>
+        </>
       )}
 
       {/* Contact page */}
@@ -143,11 +146,11 @@ function App() {
                   <p>{statusMessage}</p>
                 </div>
               )}
-              <div className="new-site-announce">
-                <p>New Site Coming Soon</p>
-              </div>
 
             </div>
+          </div>
+          <div className="new-site-announce">
+            <p>New Site Coming Soon</p>
           </div>
         </>
       )}
