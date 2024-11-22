@@ -1,7 +1,20 @@
-.App {
+#smooth-wrapper {
+  overflow: hidden;
   position: relative;
   height: 100vh;
+  /* Full viewport height */
+}
+
+#smooth-content {
+  will-change: transform;
+  width: 100%;
+  /* Avoid any stretching or misalignment */
+}
+
+.App {
+  position: relative;
   overflow: hidden;
+  /* background-color: #ff8d5a; */
 }
 
 .App-container {
@@ -18,16 +31,24 @@
   /* Prevent interaction during fade-out */
 }
 
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: white;
+}
+
 
 .video-bg {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -10;
-  /* Place the video behind other content */
+  z-index: -1;
 }
 
 .content-container {
@@ -46,8 +67,8 @@
 
 .App-content {
   background-color: transparent;
-  min-height: 100vh;
   width: 100vw;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,6 +82,10 @@
   font-family: 'GTM';
   font-size: 8rem;
 
+}
+
+.main-content {
+  overflow: hidden;
 }
 
 .App-content .nav-link {
@@ -84,34 +109,75 @@
   transform: scale(1.05);
 }
 
+.description-section {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  justify-content: space-evenly;
+  opacity: 0;
+  box-sizing: border-box;
+  padding: 1% 2%;
+}
+
+.form-description {
+  font-family: 'GTM';
+  padding-top: 5%;
+  width: 75%;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: clamp(1.9rem, 2.3vw, 2.7rem);
+  line-height: 1.9;
+  color: white;
+}
+
+.scroll-arrow {
+  font-size: 3rem;
+  color: gray;
+  animation: bounce 1.5s infinite;
+  cursor: pointer;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(10px);
+  }
+}
+
 .contact-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   opacity: 0;
   transition: opacity 0.5s ease;
-  align-items: center;
-  /* Center vertically */
-  justify-content: center;
-  /* Center horizontally */
+  width: 100vw;
   min-height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  overflow-x: hidden;
 }
 
 .wordmark-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
   margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   /* Adds spacing below the row */
 }
 
-.wordmark-header img {
-  width: 10%;
-}
 
 .contact-page-content {
   background-color: transparent;
-  min-height: auto;
-  width: 100vw;
+  height: 100vh;
+  width: 100%;
   margin-top: 5%;
   display: flex;
   overflow-x: hidden;
@@ -120,25 +186,22 @@
   justify-content: center;
   padding-left: 2rem;
   padding-right: 2rem;
-  /* Ensures spacing from screen edges */
-  box-sizing: border-box;
-  /* Include padding in the layout */
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.contact-page.show {
-  opacity: 1;
-  /* Fades in the contact page */
-}
 
 .form-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 50%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   /* Adds spacing below the row */
+}
+
+.form-description p {
+  margin: 0;
 }
 
 .form-footer {
@@ -147,8 +210,7 @@
   justify-content: end;
   align-items: center;
   width: 50%;
-  margin-bottom: 2rem;
-  /* Adds spacing below the row */
+  margin-top: 1rem;
 }
 
 .contact-title {
@@ -254,7 +316,7 @@
   background-color: rgba(0, 0, 0, 0.6);
   /* Adjust transparency here */
   pointer-events: none;
-  z-index: -2;
+  z-index: 0;
   opacity: 0;
   /* Initially hidden */
   transition: opacity 700ms ease-in-out;
@@ -265,30 +327,25 @@
   opacity: 1;
 }
 
-.new-site-announce {
-  position: fixed;
-  bottom: 30px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  overflow: hidden;
-  white-space: nowrap;
-  z-index: 10;
-  color: white;
-  background: transparent;
-}
-
 .scroll-wrapper {
   display: flex;
   width: max-content;
   animation: scroll-text 10s linear infinite;
 }
 
+.new-site-announce {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  padding-top: 100px;
+  text-align: center;
+  color: white;
+}
+
+
 .new-site-announce p {
   margin: 0;
-  /* Remove default margin */
-  padding: 0 2rem;
-  /* Add some spacing between repetitions */
   font-size: 1.2rem;
   color: white;
 }
@@ -366,20 +423,48 @@
   }
 }
 
+_::-webkit-full-page-media,
+_:future,
+:root {
+
+  .form-description {
+    padding-top: 0%;
+  }
+}
+
 /* Mobile Optimization */
 @media (max-width: 768px) {
+
+  _::-webkit-full-page-media,
+  _:future,
+  :root {
+    .form-description {
+      font-size: 1.2rem;
+    }
+  }
 
   .wordmark-header img {
     width: 40%;
   }
 
+  .description-section {
+    padding-top: 40%;
+    justify-content: flex-start;
+  }
+
+  .form-description {
+    width: 80%;
+    font-size: 1.3rem;
+  }
+
   .contact-page {
-    margin-top: 60px;
+    margin-top: 40px;
   }
 
   .contact-form {
-    width: 90%;
+    width: 75%;
   }
+
 
   .form-header {
     width: 80%;
@@ -404,6 +489,7 @@
     flex-direction: column;
   }
 
+
   .contact-title {
     font-size: 2.5rem;
   }
@@ -418,14 +504,12 @@
   }
 
   .new-site-announce p {
-    margin-top: 20px;
     font-size: 1rem;
   }
 
   .new-site-announce {
-    z-index: 1000;
-    position: absolute;
-    margin-top: 1rem;
-    padding: 0;
+    height: 8vh;
+    margin-top: 0px;
+    padding-top: 25px;
   }
 }

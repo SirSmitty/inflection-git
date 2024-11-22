@@ -1,0 +1,21 @@
+.wordmark-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.wordmark-header img {
+    width: 250px;
+}
+
+@media (max-width: 768px) {
+    .wordmark-header img {
+        width: 60%;
+    }
+}
