@@ -16,23 +16,23 @@
     text-transform: uppercase;
 }
 
-h2 {
+.privacy-policy-container h2 {
     font-size: 1.4rem;
     font-weight: bold;
     margin-top: 20px;
 }
 
-p {
+.privacy-policy-container p {
     margin: 10px 0;
     font-size: 1rem;
 }
 
-ul {
+.privacy-policy-container ul {
     margin: 10px 0 20px 20px;
     padding-left: 20px;
 }
 
-ul li {
+.privacy-policy-container ul li {
     list-style-type: disc;
     margin-bottom: 5px;
     font-size: 1rem;
