@@ -17,6 +17,9 @@ const FooterComponent = () => {
                     <a href={PDFdisc2} className="footer-item" target="_blank" rel="noopener noreferrer">
                         Form CRS
                     </a>
+                    <a href='/privacy-policy' className="footer-item" target="_blank" rel="noopener noreferrer">
+                        Privacy Policy
+                    </a>
                 </div>
             </div>
             <div className="footer-disclosure">

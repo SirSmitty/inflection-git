@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './pages/App';
 import Contact from './pages/contact/contact';
+import PrivacyPolicy from './pages/privacyPolicy/privacy';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +19,7 @@ root.render(
         </>
         } />  {/* Homepage */}
         <Route path="/contact" element={<Contact />} />  {/* Contact page */}
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />  {/* Contact page */}
       </Routes>
     </Router>
   </React.StrictMode>

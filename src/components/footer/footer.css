@@ -24,6 +24,7 @@
     margin-bottom: -25px;
     padding-bottom: 0px;
     color: #75b2b2;
+    z-index: 10;
 }
 
 .pdf-container a {
