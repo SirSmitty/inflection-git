@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import emailjs from '@emailjs/browser';
 import './App.css';
 import backgroundVideo from '../assets/InflectionGradientBG.mp4';
+import backgroundjpg from '../assets/BG2.jpg';
 import homePageHeader from '../assets/homePageHeader.svg';
 import FooterComponent from '../components/footer/footer';
 import HeaderComponent from '../components/header/header';
@@ -17,6 +18,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 function App() {
   const [showContact, setShowContact] = useState(false);
+  const [lowPower, setLowPower] = useState(false)
   const [fadeOut, setFadeOut] = useState(false);
   const [bgActive, setBgActive] = useState(false);
   const [statusMessage, setStatusMessage] = useState(''); // State for the status message
@@ -57,6 +59,25 @@ function App() {
     }, [])
   }
   useHideUnimportantErrors();
+
+  useEffect(() => {
+    const videoElement = document.getElementById("background-video");
+
+    const checkVideoPlayback = async () => {
+      try {
+        await videoElement.play();
+        setLowPower(false);
+      } catch (error) {
+        setLowPower(true);
+      }
+    };
+
+    checkVideoPlayback();
+
+    return () => {
+      // Cleanup if necessary
+    };
+  }, []);
 
 
   useEffect(() => {
@@ -144,8 +165,6 @@ function App() {
 
 
 
-
-
   return (
     <>
       {showContact && (
@@ -160,10 +179,21 @@ function App() {
 
           <div className="App">
             {/* Static background video */}
-            <video className="video-bg" autoPlay loop muted>
-              <source src={backgroundVideo} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            {lowPower ? (
+              <img
+                className="video-bg"
+                src={backgroundjpg}
+                alt="Background"
+              />
+            ) : (
+              <video
+                id='background-video'
+                className="video-bg"
+                autoPlay loop muted playsInline>
+                <source src={backgroundVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
 
             {/* Initial content container */}
             {!showContact && (
