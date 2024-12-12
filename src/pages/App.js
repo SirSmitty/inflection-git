@@ -11,7 +11,6 @@ import FooterComponent from '../components/footer/footer';
 import HeaderComponent from '../components/header/header';
 
 import backgroundjpg from '../assets/BG2.jpg';
-import paralaxBottom from '../assets/mainInfo/paralaxBottom.png'
 import opener from '../assets/mainInfo/opener.png';
 import homePageHeader from '../assets/homePageHeader.svg';
 import wordmark from '../assets/wordmark.svg';
@@ -417,23 +416,6 @@ function App() {
           <HeaderComponent smoother={smoother} />
         </header>
       )}
-
-      {showContent && (
-        <>
-          <img
-            src={paralaxBottom}
-            style={{ display: 'none' }}
-            alt="preload"
-            onLoad={handleBackgroundLoad}
-          />
-          <img
-            src={opener}
-            style={{ display: 'none' }}
-            alt="preload"
-            onLoad={handleBackgroundLoad}
-          />
-        </>
-      )}
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <div className="App">
@@ -467,22 +449,54 @@ function App() {
             )}
 
             {showContent && isLoading && (
-              <div className="bg-noise" style={{ opacity: '1' }}>
-                <div className="content-container">
-                  <div className="App-content">
-                    <img src={homePageHeader} width={'30%'} height={'auto'} alt='HomeHeader' />
-                    <div className="loading-text">
-                      Loading<span className="dots">...</span>
+              <>
+                <img
+                  src={opener}
+                  alt=""
+                  onLoad={handleBackgroundLoad}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    zIndex: -1
+                  }}
+                />
+                {lowPower ? (
+                  <img
+                    className="video-bg"
+                    src={backgroundjpg}
+                    alt="Background"
+                  />
+                ) : (
+                  <video
+                    id='background-video'
+                    className="video-bg"
+                    autoPlay loop muted playsInline>
+                    <source src={backgroundVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
+                <div className="bg-noise" style={{ opacity: '1' }}>
+                  <div className="content-container">
+                    <div className="App-content">
+                      <img src={homePageHeader} width={'30%'} height={'auto'} alt='HomeHeader' />
+                      <div className="loading-text">
+                        Loading<span className="dots">...</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </>
             )}
 
             {showContent && !isLoading && (
               <>
                 <div className='main-content' id="smooth-content" >
-                  <div className="paralax-section">
+                  <div className="paralax-section" style={{ position: 'relative', overflow: 'hidden' }}>
+                    {/* This img simulates a background image */}
                     <div className="wordmark">
                       <img src={wordmark} alt="Inflection Wordmark" />
                     </div>
