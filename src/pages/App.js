@@ -161,7 +161,8 @@ function App() {
 
 
     if (isMobile) {
-      ScrollTrigger.normalizeScroll({ allowNestedScroll: true });
+      ScrollTrigger.normalizeScroll(true);
+      ScrollTrigger.config({ ignoreMobileResize: true });
     }
 
     const newSmoother = ScrollSmoother.create({
