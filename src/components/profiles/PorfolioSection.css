@@ -1,0 +1,158 @@
+.portfolio-container .POI1-container {
+  display: flex;
+  position: relative;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+
+.portfolio-container .POI1-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  /* Initial transparent state */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.portfolio-container .POI1-container:hover::after {
+  background-color: rgba(2, 35, 26, 0.95);
+  /* Semi-transparent black overlay */
+}
+
+.portfolio-container .POI1-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portfolio-container .POI2-container {
+  display: flex;
+  position: relative;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  /* Ensures the pseudo-element stays within bounds */
+}
+
+.portfolio-container .POI2-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  /* Initial transparent state */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.portfolio-container .POI2-container:hover::after {
+  background-color: rgba(2, 35, 26, 0.95);
+  /* Semi-transparent black overlay */
+}
+
+.portfolio-container .POI2-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#poi1-title {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+}
+
+#poi2-title {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+
+.poi-title h2 {
+  font-size: 4rem;
+  font-family: 'GTMI';
+  color: white;
+  margin-bottom: 0px;
+}
+
+.poi-title p {
+  margin-top: 0px;
+  font-size: 1.5rem;
+  font-family: 'GTMI';
+  color: white;
+}
+
+#poi2-align {
+  text-align: end;
+}
+
+/* Description Styling */
+.poi-description {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  right: 5%;
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: hidden;
+  padding-right: 17px;
+  /* Increase/decrease this value for cross-browser compatibility */
+  box-sizing: content-box;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-family: Arial, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  z-index: 5;
+}
+
+/* Show Description on Hover */
+.POI1-container:hover .poi-description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.POI2-container:hover .poi-description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width:768px) {
+  .portfolio-container {
+    flex-direction: column;
+    height: 200vw;
+  }
+
+  .portfolio-container .POI1-container,
+  .portfolio-container .POI2-container {
+    width: 100%;
+  }
+
+  .poi-title h2 {
+    font-size: 2.5rem;
+    /* Adjust heading size for mobile */
+  }
+
+  .poi-title p {
+    font-size: 1.25rem;
+    /* Adjust subheading size */
+  }
+
+  .poi-description {
+    overflow-y: auto;
+  }
+}

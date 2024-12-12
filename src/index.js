@@ -14,10 +14,7 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/" element={<>
-          <App />
-        </>
-        } />  {/* Homepage */}
+        <Route path="/" element={<App />} />  {/* Homepage */}
         <Route path="/contact" element={<Contact />} />  {/* Contact page */}
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />  {/* Contact page */}
       </Routes>

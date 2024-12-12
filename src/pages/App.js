@@ -1,35 +1,54 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import emailjs from '@emailjs/browser';
-import './App.css';
-import backgroundVideo from '../assets/InflectionGradientBG.mp4';
-import backgroundjpg from '../assets/BG2.jpg';
-import homePageHeader from '../assets/homePageHeader.svg';
-import FooterComponent from '../components/footer/footer';
-import HeaderComponent from '../components/header/header';
 import ScrollSmoother from "../components/gsap-premium/src/ScrollSmoother";
 import ScrollTrigger from "../components/gsap-premium/src/ScrollTrigger";
+import { SplitText } from '../components/gsap-premium/src/SplitText';
+// internal
+import './App.css';
+import backgroundVideo from '../assets/InflectionGradientBG.mp4';
+import FooterComponent from '../components/footer/footer';
+import HeaderComponent from '../components/header/header';
+
+import backgroundjpg from '../assets/BG2.jpg';
+import homePageHeader from '../assets/homePageHeader.svg';
+import wordmark from '../assets/wordmark.svg';
+import poi1 from '../assets/mainInfo/portfolio/poi1.png';
+import poi2 from '../assets/mainInfo/portfolio/poi2.png';
+import logoWhite from '../assets/logos/logoWhite.png';
+import Carousel from '../components/carosel/carousel';
 
 
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
 
 
 function App() {
-  const [showContact, setShowContact] = useState(false);
+  const [showContent, setshowContent] = useState(false);
   const [lowPower, setLowPower] = useState(false)
   const [fadeOut, setFadeOut] = useState(false);
-  const [bgActive, setBgActive] = useState(false);
-  const [statusMessage, setStatusMessage] = useState(''); // State for the status message
+  const [statusMessage, setStatusMessage] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
+  const [smoother, setSmoother] = useState(null);
+
   const contactPageRef = useRef(null);
-  const descriptionref = useRef(null);
   const formRef = useRef(null);
+  const sectionRef = useRef(null); // Reference for the whole section
+  const headlineRef = useRef(null); // Reference for the main headline
+  const paragraphRef = useRef(null); // Reference for the paragraph
+  const theWysRef = useRef(null);
+
+  const aboutUsRef = useRef(null);
+  const contactRef = useRef(null);
+
+
 
   const handleButtonClick = () => {
     setFadeOut(true); // Trigger fade-out animation
     setTimeout(() => {
-      setShowContact(true);
+      setshowContent(true);
     }, 1000);
   };
 
@@ -60,6 +79,51 @@ function App() {
   }
   useHideUnimportantErrors();
 
+  // Check if the device is mobile
+  useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
+    };
+
+    updateIsMobile(); // Check on mount
+    window.addEventListener('resize', updateIsMobile); // Update on resize
+
+    return () => {
+      window.removeEventListener('resize', updateIsMobile);
+    };
+  }, []);
+
+  // paralax
+  useEffect(() => {
+    if (!showContent) return;
+    if (isMobile) {
+      // Mobile-specific parallax effect
+      gsap.to(".paralax-section", {
+        backgroundPosition: "45% -200px", // Different parallax for mobile
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".paralax-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+    } else {
+      gsap.to(".paralax-section", {
+        backgroundPosition: "center -200px", // Move background upward
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".paralax-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: true, // Smooth scroll effect
+        },
+      });
+    }
+  }, [showContent, isMobile]);
+
+  // low power useEffect
   useEffect(() => {
     const videoElement = document.getElementById("background-video");
 
@@ -79,10 +143,15 @@ function App() {
     };
   }, []);
 
-
+  // smoothscroll useEffect
   useEffect(() => {
 
-    const smoother = ScrollSmoother.create({
+
+    if (isMobile) {
+      ScrollTrigger.normalizeScroll({ allowNestedScroll: true });
+    }
+
+    const newSmoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
       smooth: 1.5,
@@ -92,7 +161,7 @@ function App() {
 
     // Handle cleanup and reinitialization on resize
     const handleResize = () => {
-      smoother.kill(); // Kill the current instance
+      newSmoother.kill(); // Kill the current instance
       ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
@@ -100,35 +169,176 @@ function App() {
         effects: true,
       });
     };
+    setSmoother(newSmoother);
 
     window.addEventListener("resize", handleResize);
 
-    if (showContact && contactPageRef.current) {
-      setBgActive(true);
+    if (showContent && contactPageRef.current) {
 
       // Animate the contact page
       gsap.fromTo(
         contactPageRef.current,
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
       );
     }
 
     // Animate the description section
-    const descriptionSection = document.querySelector(".description-section");
-    if (descriptionSection) {
+    const paralaxSection = document.querySelector(".paralax-section");
+    if (paralaxSection) {
       gsap.fromTo(
-        descriptionSection,
+        paralaxSection,
         { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
       );
     }
 
     return () => {
-      smoother.kill(); // Clean up the smoother instance on component unmount
+      newSmoother.kill(); // Clean up the smoother instance on component unmount
       window.removeEventListener("resize", handleResize);
     };
-  }, [showContact]);
+  }, [showContent, isMobile]);
+
+
+  // story gsap
+  useEffect(() => {
+    if (!showContent) return;
+    let splitHeadline;
+    let splitParagraph;
+
+    const animateSplitText = () => {
+      splitHeadline = new SplitText(headlineRef.current, { type: "words,chars" });
+      splitParagraph = new SplitText(paragraphRef.current, { type: "lines,words", linesClass: "split-line" });
+      function allDone() {
+        splitParagraph.revert();
+      }
+
+      // Animation timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%", // Start animation when section is 80% visible
+          end: "bottom 20%",
+          toggleActions: "play none none none", // Rewind when out of view
+        },
+      });
+
+      // Animate headline characters
+      tl.from(splitHeadline.chars, {
+        opacity: 0,
+        y: 20,
+        stagger: 0.05,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+
+      // Animate paragraph lines
+      tl.from(splitParagraph.lines, {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power2.out",
+        onComplete: allDone
+      });
+    };
+
+    // Ensure fonts are fully loaded
+    document.fonts.ready
+      .then(() => {
+        animateSplitText();
+      })
+      .catch((error) => {
+        console.error("Error loading fonts:", error);
+      });
+
+    return () => {
+      // Cleanup SplitText instances
+      if (splitHeadline) splitHeadline.revert();
+      if (splitParagraph) splitParagraph.revert();
+    };
+  }, [showContent]);
+
+  // description animations on profiles
+  useEffect(() => {
+    const sections = document.querySelectorAll("[data-animate='split-text']");
+
+    sections.forEach((section) => {
+      const paragraphs = section.querySelectorAll(".poi-description p");
+      if (!paragraphs.length) return;
+
+      let splitInstances = [];
+
+      const setupSplitText = () => {
+        // Initialize SplitText for the hovered section only
+        splitInstances = Array.from(paragraphs).map(
+          (paragraph) => new SplitText(paragraph, { type: "lines" })
+        );
+      };
+
+      const cleanupSplitText = () => {
+        // Revert SplitText instances
+        splitInstances.forEach((split) => split.revert());
+        splitInstances = [];
+      };
+
+      const animateLines = () => {
+        const allLines = splitInstances.flatMap((split) => split.lines);
+
+        gsap.from(allLines, {
+          opacity: 0,
+          y: 20,
+          stagger: 0.05,
+          duration: 0.5,
+          ease: "power2.out",
+          immediateRender: true,
+          onStart: () => {
+            allLines.forEach((line) => {
+              line.style.textAlign = "center";
+            });
+          },
+        });
+      };
+
+      // Event listeners for hover
+      const handleMouseEnter = () => {
+        setupSplitText();
+        animateLines();
+      };
+
+      const handleMouseLeave = () => {
+        cleanupSplitText();
+      };
+
+      section.addEventListener("mouseenter", handleMouseEnter);
+      section.addEventListener("mouseleave", handleMouseLeave);
+
+      // Cleanup on unmount
+      return () => {
+        section.removeEventListener("mouseenter", handleMouseEnter);
+        section.removeEventListener("mouseleave", handleMouseLeave);
+      };
+    });
+  }, [showContent]);
+
+  // the Wys useEffect
+  useEffect(() => {
+    if (!showContent) return; // Exit if the ref is null
+    const sections = theWysRef.current.querySelectorAll(".why, .what, .how");
+
+    gsap.from(sections, {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.3,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: theWysRef.current,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none none",
+      },
+    });
+  }, [showContent]);
 
   const handleSubmit = () => {
     // Collect form data manually
@@ -164,40 +374,40 @@ function App() {
   };
 
 
+  const toggleDescription = (sectionId) => {
+    setActiveSection((prevSection) => (prevSection === sectionId ? null : sectionId));
+  };
+
+
   // init add for branch commit
   return (
     <>
-      {showContact && (
+
+      {showContent && (
         <header className="fixed-header">
-          <HeaderComponent />
+          <HeaderComponent smoother={smoother} />
         </header>
       )}
       <div id="smooth-wrapper">
-
-
         <div id="smooth-content">
-
           <div className="App">
-            {/* Static background video */}
-            {lowPower ? (
-              <img
-                className="video-bg"
-                src={backgroundjpg}
-                alt="Background"
-              />
-            ) : (
-              <video
-                id='background-video'
-                className="video-bg"
-                autoPlay loop muted playsInline>
-                <source src={backgroundVideo} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            )}
-
-            {/* Initial content container */}
-            {!showContact && (
+            {!showContent && (
               <>
+                {lowPower ? (
+                  <img
+                    className="video-bg"
+                    src={backgroundjpg}
+                    alt="Background"
+                  />
+                ) : (
+                  <video
+                    id='background-video'
+                    className="video-bg"
+                    autoPlay loop muted playsInline>
+                    <source src={backgroundVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
                 <div className="bg-noise" style={{ opacity: '1' }}></div>
                 <div className={`content-container ${fadeOut ? 'fade-out' : ''}`}>
                   <div className="App-content">
@@ -210,40 +420,175 @@ function App() {
               </>
             )}
 
-            {/* Contact page */}
-            {showContact && (
+            {showContent && (
               <>
-                <div className={`bg-noise ${bgActive ? 'active' : ''}`}></div>
-                <div className={`bg-dark-overlay ${bgActive ? 'active' : ''}`}></div>
-                <div className='main-content' ref={descriptionref} id="smooth-content" >
-
-                  <div className="description-section">
-                    <div className="form-description">
-                      <p>
-                        Inflection Capital Management is a partner-owned and operated multi-family office
-                        based in Silicon Valley, dedicated to advising successful families, individuals,
-                        family offices, and foundations in preserving and building their wealth and legacy.
-                        With a commitment to personal connection and a deep understanding of our clients'
-                        unique goals, we serve as trusted stewards for generations to come.
-                      </p>
-                    </div>
-                    <div
-                      className="scroll-arrow"
-                      onClick={() => {
-                        const yOffset = contactPageRef.current.offsetTop; // Get the contact section's position
-                        window.scrollTo({
-                          top: yOffset,
-                          behavior: "smooth", // Smooth scroll behavior
-                        });
-                      }}
-                    >
-                      <span>&#8595;</span>
+                <div className='main-content' id="smooth-content" >
+                  <div className="paralax-section">
+                    <div className="wordmark">
+                      <img src={wordmark} alt="Inflection Wordmark" />
                     </div>
                   </div>
-                  <div className="contact-page" ref={contactPageRef}>
-                    <div className="contact-page-content">
+                  <div className='main-content-container'>
+                    <div class="combined-bg"></div>
+                    <div className="story-of-page" id='about' ref={aboutUsRef}>
+                      <div className='storyInflec'>
+                        <div className='story-image'>
+                          <img src={logoWhite} alt='story' />
+                        </div>
+                        <div className='story-text'>
+                          <h1 ref={headlineRef}>
+                            The Story of <span style={{ fontFamily: 'GTMI' }}>Inflection</span>
+                          </h1>
+                          <p ref={paragraphRef}>
+                            <span style={{ fontFamily: 'GTMI' }} id='inflectionStory'>Inflection Capital Management</span>{" "}is a partner-owned and operated multi-family office based in Silicon Valley, dedicated to working with clients to preserve and grow their wealth and legacy. Our careers have been dedicated to working with wealth creators, families navigating periods of transition, and family offices, including their foundations. With a commitment to personal connection and a deep understanding of our clients' unique goals, we serve as trusted stewards for generations to come.
+                          </p>
+                        </div>
+                      </div>
+                      <div className='breakLine-container'>
+                        <div id='after-storyText-Break' className='breakLine'></div>
+                      </div>
+                      <div className='theWys' ref={theWysRef}>
+                        <div className='why'>
+                          <h1>Our Clients Inspire Us</h1>
+                          <h3>&#40;The Why&#41;</h3>
+                          <p>
+                            We believe that people thrive when they have the
+                            space, support, and resources to focus on what
+                            matters most. At Inflection, we are inspired by our
+                            client&#39;s passions and motivations, whether that be
+                            family, business, or philanthropy. This is why we
+                            start our process with discovering what a
+                            relationship means to you, how you think about
+                            money and discuss those who are impacted by the
+                            wealth.
+                          </p>
+                        </div>
+                        <div className='what'>
+                          <h1>Our Partnership</h1>
+                          <h3>&#40;The What&#41;</h3>
+                          <p>
+                            We meet you at the inflection point of your legacy
+                            and wealth. Together, we will cultivate the
+                            infrastructure to support your family&#39;s specific
+                            needs, offering institutional-level expertise to
+                            enhance your financial well-being and personal
+                            affairs. We act as your advocate by curating a
+                            refined &#40;need perhaps a different adjective here that
+                            isn&#39;t industry jargon&#41; investment portfolio with the
+                            ingredients specific to how you want to protect and
+                            grow your assets.
+                          </p>
+                        </div>
+                        <div className='how'>
+                          <h1>Success Together</h1>
+                          <h3>&#40;The How&#41;</h3>
+                          <p>
+                            As your partner, we leverage our experience of
+                            working with hundreds of single family offices and
+                            successful families over the last two decades to
+                            offer you a truly differentiated perspective. Once
+                            we've defined your financial priorities, we provide
+                            clarity &#40;I know clarity is repetitive but I really like how
+                            it resonates with people&#41; and a path forward by
+                            acting as your steward for generations to come.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='infoBottom'></div>
+                    <div className='carosel-container'>
+                      <Carousel />
+                    </div>
+                    <div className='portfolio-container'>
+                      <div className='POI1-container' data-animate='split-text'>
+                        <div className='mobile-container'>
+                          <div className='mobile-pic-container'>
+                            <img src={poi1} alt='poi1' />
+                          </div>
+                          <div className='poi-title' id='poi1-title'>
+                            <h2>
+                              Justin Kunz
+                            </h2>
+                            <p>
+                              CEO | Founding Partner
+                            </p>
+                          </div>
+                          <div
+                            className={`poi-description ${isMobile && activeSection === "POI1" ? "visible" : ""
+                              }`}
+                            id="poi1-description"
+                          >
+                            <p>
+                              Justin Kunz is the CEO and Founding Partner of Inflection Capital Management, where he leads the firm&#39;s business, investment strategy and manages client relationships. With two decades of experience in wealth management and family office services, Justin has built a reputation for providing personalized solutions and strategic guidance to ultra-high-net-worth families and institutions.
+                            </p>
+                            <p>
+                              Justin began his career in 2005 and in 2007, started working at Fidelity Investments, where he played a pivotal role in establishing the West Coast presence of Fidelity&#39;s Family Office team. During his tenure, he oversaw over $20 billion in client assets, offering investment expertise, bespoke private market allocations, and comprehensive asset safeguarding services.
+                            </p>
+                            <p>
+                              Following Fidelity, Justin joined BlackRock as Head of the West Coast Family Office team, where he also contributed to the firm&#39;s national family office strategy. At BlackRock, he partnered with institutional families and family offices to deliver the full spectrum of the firm's investment capabilities. His approach emphasized data-driven insights and dynamic portfolio management across all asset classes, including public equity, fixed income, hedge funds, private equity, venture capital, private credit, real estate, and risk and tax mitigation strategies.
+                            </p>
+                            <p>
+                              Justin earned a degree in Economics from the Eller College of Business at the University of Arizona, where he served on the Student Advisory Board and was captain of the men&#39;s Rugby team. He remains deeply committed to philanthropy, actively supporting foundations dedicated to youth athletics in the Bay Area. Additionally, he provides consultation and contributes to the stewardship of Graeagle, California.
+                            </p>
+                            <p>
+                              Justin resides in Marin, California, with his wife, Lindsay, and their two children.
+                            </p>
+                          </div>
+                          {isMobile && (
+                            <div className="read-bio-button">
+                              <button onClick={() => toggleDescription("POI1")}>
+                                {activeSection === "POI1" ? "- Read Less" : "+ Read Bio"}
+                              </button>
+                            </div>
+                          )}
+                        </div>
+
+                      </div>
+                      <div className='POI2-container' data-animate='split-text'>
+                        <div className='mobile-container'>
+                          <div className='mobile-pic-container'>
+                            <img src={poi2} alt='poi2' />
+                          </div>
+                          <div className='poi-title' id='poi2-title'>
+                            <h2>
+                              Katie Riley Mahany
+                            </h2>
+                            <p id='poi2-align'>
+                              Managing Partner
+                            </p>
+                          </div>
+                          <div
+                            className={`poi-description ${isMobile && activeSection === "POI2" ? "visible" : ""
+                              }`}
+                            id="poi2-description"
+                          >
+                            <p>
+                              Katie Riley Mahany is a Managing Partner at Inflection Capital Management, playing a key role supporting strategic client relationships, business strategy and operations.
+                            </p>
+                            <p>
+                              Katie joined Inflection from BlackRock, where, in 2019 she began her tenure as an Analyst in the Institutional Client Business. Because of her deep client relationships and penchant for leadership, she grew to lead relationship manager for key family office and foundation clients, overseeing a portfolio totaling over $5.6 billion by 2024. Throughout her time at BlackRock, Katie helped to deliver investment solutions across public and private markets to her clients, with a focus on risk management and tax mitigation. Katie was recognized for creating and leading mentorship programs for junior team members, enhancing both team development and client service across the firm, something she is proud to bring to the team at Inflection.
+                            </p>
+                            <p>
+                              Katie has always had a passion for education, having earned recognition as a Fulbright Scholar, teaching English in Madrid, Spain from 2014-2015, where she honed her communication skills and global perspective. She spent her early career working in education in both the US and Europe, teaching and tutoring high school students in language, reading and study skills. Katie brings an educational lens to work every day, focusing on providing clarity to her clients with empathy and financial acumen through even the most complex processes.
+                            </p>
+                            <p>
+                              Katie graduated with a BA in Political Science and Spanish from College of the Holy Cross, Phi Beta Kappa, magna cum laude. She also received her MSc in Business Management from Trinity College Dublin in 2017, with distinction.
+                            </p>
+                          </div>
+                          {isMobile && (
+                            <div className="read-bio-button">
+                              <button onClick={() => toggleDescription("POI2")}>
+                                {activeSection === "POI2" ? "- Read Less" : "+ Read Bio"}
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="contact-page-content" id='contact' ref={contactRef}>
+                      <div className='contact-background-overlay'></div>
                       <div className="form-header">
-                        <h1 className="contact-title">Get in Touch</h1>
+                        <h1 className="contact-title"><span style={{ fontFamily: "RoobertoL" }}>Meet with the</span> Inflection Team</h1>
                       </div>
 
                       <form className="contact-form" ref={formRef} onSubmit={handleSubmit}>
@@ -294,12 +639,9 @@ function App() {
                         </div>
                       )}
 
-                      <div className="new-site-announce">
-                        <p>New Site Coming Soon</p>
-                      </div>
                     </div>
+                    <FooterComponent />
                   </div>
-                  <FooterComponent />
                 </div>
               </>
             )}
