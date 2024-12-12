@@ -11,6 +11,8 @@ import FooterComponent from '../components/footer/footer';
 import HeaderComponent from '../components/header/header';
 
 import backgroundjpg from '../assets/BG2.jpg';
+import paralaxBottom from '../assets/mainInfo/paralaxBottom.png'
+import opener from '../assets/mainInfo/opener.png';
 import homePageHeader from '../assets/homePageHeader.svg';
 import wordmark from '../assets/wordmark.svg';
 import poi1 from '../assets/mainInfo/portfolio/poi1.png';
@@ -26,6 +28,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
 function App() {
   const [showContent, setshowContent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [lowPower, setLowPower] = useState(false)
   const [fadeOut, setFadeOut] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
@@ -92,6 +95,17 @@ function App() {
       window.removeEventListener('resize', updateIsMobile);
     };
   }, []);
+
+  const handleBackgroundLoad = () => {
+    console.log("isLoading")
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    if (showContent) {
+      setIsLoading(true); // Start loading when content is triggered
+    }
+  }, [showContent]);
 
   // paralax
   useEffect(() => {
@@ -375,7 +389,22 @@ function App() {
 
 
   const toggleDescription = (sectionId) => {
-    setActiveSection((prevSection) => (prevSection === sectionId ? null : sectionId));
+    setActiveSection((prevSection) => {
+      const newSection = prevSection === sectionId ? null : sectionId;
+
+      // Wait for state update to apply changes to the DOM
+      requestAnimationFrame(() => {
+        if (newSection) {
+          const elementId = `${sectionId.toLowerCase()}-description`;
+          const element = document.getElementById(elementId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+
+      return newSection;
+    });
   };
 
 
@@ -387,6 +416,23 @@ function App() {
         <header className="fixed-header">
           <HeaderComponent smoother={smoother} />
         </header>
+      )}
+
+      {showContent && (
+        <>
+          <img
+            src={paralaxBottom}
+            style={{ display: 'none' }}
+            alt="preload"
+            onLoad={handleBackgroundLoad}
+          />
+          <img
+            src={opener}
+            style={{ display: 'none' }}
+            alt="preload"
+            onLoad={handleBackgroundLoad}
+          />
+        </>
       )}
       <div id="smooth-wrapper">
         <div id="smooth-content">
@@ -420,7 +466,20 @@ function App() {
               </>
             )}
 
-            {showContent && (
+            {showContent && isLoading && (
+              <div className="bg-noise" style={{ opacity: '1' }}>
+                <div className="content-container">
+                  <div className="App-content">
+                    <img src={homePageHeader} width={'30%'} height={'auto'} alt='HomeHeader' />
+                    <div className="loading-text">
+                      Loading<span className="dots">...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {showContent && !isLoading && (
               <>
                 <div className='main-content' id="smooth-content" >
                   <div className="paralax-section">
