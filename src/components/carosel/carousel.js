@@ -2,9 +2,9 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import "./carousel.css"; // Import your styles
 import leftArrow from '../../assets/mainInfo/carousel/leftArrow.svg';
 import rightArrow from '../../assets/mainInfo/carousel/rightArrow.svg';
-import beach from '../../assets/mainInfo/carousel/beach.jpg';
-import bridge from '../../assets/mainInfo/carousel/carousel2.png';
-import farm from '../../assets/mainInfo/carousel/farm.jpg';
+import beach from '../../assets/mainInfo/carousel/beach_copy.jpg';
+import bridge from '../../assets/mainInfo/carousel/bridge.jpg';
+import farm from '../../assets/mainInfo/carousel/farm_copy.jpg';
 import { gsap } from 'gsap';
 import { useSwipeable } from "react-swipeable";
 import ScrollSmoother from "../../components/gsap-premium/src/ScrollSmoother";

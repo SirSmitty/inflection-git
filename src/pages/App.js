@@ -390,15 +390,18 @@ function App() {
 
   const toggleDescription = (sectionId) => {
     setActiveSection((prevSection) => {
-      const newSection = prevSection === sectionId ? null : sectionId;
+      const isClosing = prevSection === sectionId;
+      const newSection = isClosing ? null : sectionId;
 
-      // Wait for state update to apply changes to the DOM
       requestAnimationFrame(() => {
-        if (newSection) {
+        // We only want to scroll when closing the section
+        if (isClosing && smoother) {
           const elementId = `${sectionId.toLowerCase()}-description`;
           const element = document.getElementById(elementId);
+          console.log("element to scroll to:", element);
           if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Use smoother's scrollTo method
+            smoother.scrollTo(element, true, "top");
           }
         }
       });
