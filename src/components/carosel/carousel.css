@@ -193,7 +193,8 @@
 
     .carousel-breakLine-container {
         position: relative;
-        padding-top: 5%;
+        padding-top: 0%;
+        top: 39%;
     }
 
     .carousel-slide {
@@ -207,7 +208,7 @@
     }
 
     .carousel-text {
-        top: 44%;
+        top: 41%;
     }
 
 
