@@ -32,7 +32,7 @@ const HeaderComponent = ({ smoother }) => {
                 const rect = target.getBoundingClientRect();
 
                 const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-                const isTaking80Percent = visibleHeight / viewportHeight >= 0.8;
+                const isTaking80Percent = visibleHeight / viewportHeight >= 0.7;
                 setIsScrolled(isTaking80Percent);
             }
         };
@@ -64,10 +64,12 @@ const HeaderComponent = ({ smoother }) => {
                 className={`header-header-container ${isScrolled ? "scrolled" : ""}`}
             >
                 <div className="wordmark-header">
-                    <img
-                        src={isMobile ? whiteLogo : wordmarkwL}
-                        alt="Inflection Wordmark"
-                    />
+                    <a onClick={() => (window.location.href = "/")} target="_blank">
+                        <img
+                            src={isMobile ? whiteLogo : wordmarkwL}
+                            alt="Inflection Wordmark"
+                        />
+                    </a>
                 </div>
                 <div className='header-navLinks-container'>
                     <button className="menu-toggle" onClick={() => setMenuOpen(true)}>
@@ -84,9 +86,9 @@ const HeaderComponent = ({ smoother }) => {
                             </svg>
                         </button>
                         <ul className="nav-list">
-                            <li>
+                            {/* <li>
                                 <button onClick={() => (window.location.href = "/")} className="header-nav-link">Home</button>
-                            </li>
+                            </li> */}
                             {/* <li>
                                 <button onClick={() => smoothScrollTo('#services')} className="header-nav-link">Services</button>
                             </li> */}
