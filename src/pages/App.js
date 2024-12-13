@@ -436,18 +436,26 @@ function App() {
       const isClosing = prevSection === sectionId;
       const newSection = isClosing ? null : sectionId;
 
-      requestAnimationFrame(() => {
-        // We only want to scroll when closing the section
-        if (isClosing && smoother) {
-          const elementId = `${sectionId.toLowerCase()}-description`;
-          const element = document.getElementById(elementId);
-          console.log("element to scroll to:", element);
+      if (isClosing) {
+        // Scroll back to the top of the section after a slight delay
+        setTimeout(() => {
+          const elementId = `${sectionId}-container`;
+          console.log("elementid", elementId);
+          const element = document.querySelector(`.${elementId}`);
+          console.log("element", element);
+
           if (element) {
-            // Use smoother's scrollTo method
-            smoother.scrollTo(element, true, "top");
+            const elementTop = element.getBoundingClientRect().top + window.scrollY;
+            const offset = 50; // Adjust this value as needed
+            window.scrollTo({
+              top: elementTop - offset,
+              behavior: "smooth",
+            });
+          } else {
+            console.log("element not found");
           }
-        }
-      });
+        }, 100); // 100ms delay to allow layout to update
+      }
 
       return newSection;
     });

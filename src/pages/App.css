@@ -256,7 +256,7 @@
   flex-direction: column;
   width: 60%;
   color: #d2e9e4;
-  margin-top: -50px;
+  margin-top: -40px;
 }
 
 .storyInflec .story-text h1 {
@@ -830,10 +830,6 @@ _:future,
     margin-top: -100px;
   }
 
-  .paralax-section {
-    height: 80vh;
-  }
-
   .paralax-section .wordmark {
     width: 60%;
     margin-bottom: 40%;
@@ -852,6 +848,7 @@ _:future,
   .paralax-section {
     background-image: url('../assets/logos/mobileParalax.jpg');
     background-position: 45% 50%;
+    height: 80vh;
     background-position-y: -10px !important;
   }
 

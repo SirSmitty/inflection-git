@@ -97,8 +97,8 @@
     align-items: center;
     text-align: center;
     position: absolute;
-    margin-top: 3.1vw;
-    top: 48%;
+    margin-top: 5vw;
+    top: 50%;
     width: 100%;
     z-index: 2;
     color: #ccc;
@@ -107,6 +107,7 @@
 }
 
 .carousel-text h2 {
+    margin-top: 0px;
     font-family: 'RoobertoL';
     font-size: 3vw;
     margin-bottom: 0px;
@@ -206,7 +207,7 @@
     }
 
     .carousel-text {
-        top: 40%;
+        top: 44%;
     }
 
 
