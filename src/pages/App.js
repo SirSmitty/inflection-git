@@ -577,45 +577,23 @@ function App() {
                             <h1>Our Clients Inspire Us</h1>
                             {/* <h3>&#40;The Why&#41;</h3> */}
                             <p>
-                              We believe that people thrive when they have the
-                              space, support, and resources to focus on what
-                              matters most. At Inflection, we are inspired by our
-                              client&#39;s passions and motivations, whether that be
-                              family, business, or philanthropy. This is why we
-                              start our process with discovering what a
-                              relationship means to you, how you think about
-                              money and discuss those who are impacted by the
-                              wealth.
+                              We believe that people thrive when they have the space, support, and resources to focus on what matters most. At Inflection, we are inspired by our clients&#39; passions and motivations, whether that be family, business, or philanthropy.
+                              We recognize that our clients are not interchangeable, which is why we believe in a personalized relationship for each client, allowing them to maximize their time and focus on their pursuits.
+
                             </p>
                           </div>
                           <div className='what'>
                             <h1>Our Partnership</h1>
                             {/* <h3>&#40;The What&#41;</h3> */}
                             <p>
-                              We meet you at the inflection point of your legacy
-                              and wealth. Together, we will cultivate the
-                              infrastructure to support your family&#39;s specific
-                              needs, offering institutional-level expertise to
-                              enhance your financial well-being and personal
-                              affairs. We act as your advocate by curating a
-                              refined &#40;need perhaps a different adjective here that
-                              isn&#39;t industry jargon&#41; investment portfolio with the
-                              ingredients specific to how you want to protect and
-                              grow your assets.
+                              We meet you at the inflection point of your legacy and wealth, collaborating to build the infrastructure to support your family&#39;s unique needs. With institutional-level expertise, we enhance both your financial well-being and personal affairs. Acting as your advocate, we design a refined investment portfolio that aligns precisely with your vision for protecting and growing your assets.
                             </p>
                           </div>
                           <div className='how'>
                             <h1>Success Together</h1>
                             {/* <h3>&#40;The How&#41;</h3> */}
                             <p>
-                              As your partner, we leverage our experience of
-                              working with hundreds of single family offices and
-                              successful families over the last two decades to
-                              offer you a truly differentiated perspective. Once
-                              we've defined your financial priorities, we provide
-                              clarity &#40;I know clarity is repetitive but I really like how
-                              it resonates with people&#41; and a path forward by
-                              acting as your steward for generations to come.
+                              As your partner, we leverage decades of experience of working with hundreds of single family offices and successful families, offering you a uniquely informed perspective. After establishing your financial priorities, we provide clarity and direction, acting as your steward to safeguard and grow your legacy for generations to come.
                             </p>
                           </div>
                         </div>
@@ -834,7 +812,7 @@ function App() {
                             The Story of <span style={{ fontFamily: 'GTMI' }}>Inflection</span>
                           </h1>
                           <p ref={paragraphRef}>
-                            <span style={{ fontFamily: 'GTMI' }} id='inflectionStory'>Inflection Capital Management</span>{" "}is a partner-owned and operated multi-family office based in Silicon Valley, dedicated to working with clients to preserve and grow their wealth and legacy. Our careers have been dedicated to working with wealth creators, families navigating periods of transition, and family offices, including their foundations. With a commitment to personal connection and a deep understanding of our clients' unique goals, we serve as trusted stewards for generations to come.
+                            <span style={{ fontFamily: 'GTMI' }} id='inflectionStory'>Inflection Capital Management</span>{" "}is a partner-owned and operated multi-family office based in Silicon Valley, dedicated to working with clients to preserve and grow their wealth and legacy. Our careers have been devoted to working with wealth creators, families navigating periods of transition, and family offices, including their foundations. With a commitment to personal connection and a deep understanding of our clients' unique goals, we serve as trusted stewards for generations to come.
                           </p>
                         </div>
                       </div>
@@ -846,45 +824,22 @@ function App() {
                           <h1>Our Clients Inspire Us</h1>
                           {/* <h3>&#40;The Why&#41;</h3> */}
                           <p>
-                            We believe that people thrive when they have the
-                            space, support, and resources to focus on what
-                            matters most. At Inflection, we are inspired by our
-                            client&#39;s passions and motivations, whether that be
-                            family, business, or philanthropy. This is why we
-                            start our process with discovering what a
-                            relationship means to you, how you think about
-                            money and discuss those who are impacted by the
-                            wealth.
+                            We believe that people thrive when they have the space, support, and resources to focus on what matters most. At Inflection, we are inspired by our clients&#39; passions and motivations, whether that be family, business, or philanthropy.
+                            We recognize that our clients are not interchangeable, which is why we believe in a personalized relationship for each client, allowing them to maximize their time and focus on their pursuits.
                           </p>
                         </div>
                         <div className='what'>
                           <h1>Our Partnership</h1>
                           {/* <h3>&#40;The What&#41;</h3> */}
                           <p>
-                            We meet you at the inflection point of your legacy
-                            and wealth. Together, we will cultivate the
-                            infrastructure to support your family&#39;s specific
-                            needs, offering institutional-level expertise to
-                            enhance your financial well-being and personal
-                            affairs. We act as your advocate by curating a
-                            refined &#40;need perhaps a different adjective here that
-                            isn&#39;t industry jargon&#41; investment portfolio with the
-                            ingredients specific to how you want to protect and
-                            grow your assets.
+                            We meet you at the inflection point of your legacy and wealth, collaborating to build the infrastructure to support your family&#39;s unique needs. With institutional-level expertise, we enhance both your financial well-being and personal affairs. Acting as your advocate, we design a refined investment portfolio that aligns precisely with your vision for protecting and growing your assets.
                           </p>
                         </div>
                         <div className='how'>
                           <h1>Success Together</h1>
                           {/* <h3>&#40;The How&#41;</h3> */}
                           <p>
-                            As your partner, we leverage our experience of
-                            working with hundreds of single family offices and
-                            successful families over the last two decades to
-                            offer you a truly differentiated perspective. Once
-                            we've defined your financial priorities, we provide
-                            clarity &#40;I know clarity is repetitive but I really like how
-                            it resonates with people&#41; and a path forward by
-                            acting as your steward for generations to come.
+                            As your partner, we leverage decades of experience of working with hundreds of single family offices and successful families, offering you a uniquely informed perspective. After establishing your financial priorities, we provide clarity and direction, acting as your steward to safeguard and grow your legacy for generations to come.
                           </p>
                         </div>
                       </div>
