@@ -172,7 +172,7 @@
 .paralax-section {
   width: 100%;
   height: 105vh;
-  background-image: url("../assets/mainInfo/opener.png");
+  background-image: url("../assets/mainInfo/openersmall.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -377,7 +377,7 @@
 
 .theWys .why p {
   padding-left: 5%;
-  font-size: 1.2vw;
+  font-size: 1.2rem;
   text-align: left;
 }
 
@@ -404,7 +404,7 @@
 
 .theWys .what p {
   padding-left: 5%;
-  font-size: 1.2vw;
+  font-size: 1.2rem;
   text-align: left;
 }
 
@@ -432,7 +432,7 @@
 
 .theWys .how p {
   padding-left: 5%;
-  font-size: 1.2vw;
+  font-size: 1.2rem;
   text-align: left;
 }
 
