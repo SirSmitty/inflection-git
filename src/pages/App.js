@@ -575,7 +575,7 @@ function App() {
                         <div className='theWys' ref={theWysRef}>
                           <div className='why'>
                             <h1>Our Clients Inspire Us</h1>
-                            <h3>&#40;The Why&#41;</h3>
+                            {/* <h3>&#40;The Why&#41;</h3> */}
                             <p>
                               We believe that people thrive when they have the
                               space, support, and resources to focus on what
@@ -590,7 +590,7 @@ function App() {
                           </div>
                           <div className='what'>
                             <h1>Our Partnership</h1>
-                            <h3>&#40;The What&#41;</h3>
+                            {/* <h3>&#40;The What&#41;</h3> */}
                             <p>
                               We meet you at the inflection point of your legacy
                               and wealth. Together, we will cultivate the
@@ -606,7 +606,7 @@ function App() {
                           </div>
                           <div className='how'>
                             <h1>Success Together</h1>
-                            <h3>&#40;The How&#41;</h3>
+                            {/* <h3>&#40;The How&#41;</h3> */}
                             <p>
                               As your partner, we leverage our experience of
                               working with hundreds of single family offices and
@@ -816,7 +816,14 @@ function App() {
                     </div>
                   </div>
                   <div className='main-content-container'>
-                    <div class="combined-bg"></div>
+                    <div className={`combined-bg-wrapper ${isImageLoaded ? "loaded" : ""}`}>
+                      <img
+                        src={bottomParalax} // Replace with your image path
+                        alt="Parallax Background"
+                        className="combined-bg-img"
+                        onLoad={handleImageLoad}
+                      />
+                    </div>
                     <div className="story-of-page" id='about' ref={aboutUsRef}>
                       <div className='storyInflec'>
                         <div className='story-image'>
@@ -837,7 +844,7 @@ function App() {
                       <div className='theWys' ref={theWysRef}>
                         <div className='why'>
                           <h1>Our Clients Inspire Us</h1>
-                          <h3>&#40;The Why&#41;</h3>
+                          {/* <h3>&#40;The Why&#41;</h3> */}
                           <p>
                             We believe that people thrive when they have the
                             space, support, and resources to focus on what
@@ -852,7 +859,7 @@ function App() {
                         </div>
                         <div className='what'>
                           <h1>Our Partnership</h1>
-                          <h3>&#40;The What&#41;</h3>
+                          {/* <h3>&#40;The What&#41;</h3> */}
                           <p>
                             We meet you at the inflection point of your legacy
                             and wealth. Together, we will cultivate the
@@ -868,7 +875,7 @@ function App() {
                         </div>
                         <div className='how'>
                           <h1>Success Together</h1>
-                          <h3>&#40;The How&#41;</h3>
+                          {/* <h3>&#40;The How&#41;</h3> */}
                           <p>
                             As your partner, we leverage our experience of
                             working with hundreds of single family offices and

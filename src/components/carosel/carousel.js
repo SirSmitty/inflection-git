@@ -23,6 +23,15 @@ const Carousel = () => {
 
     const slides = useMemo(() => [
         {
+            image: farm,
+            title: (
+                <>
+                    Generational <span style={{ fontFamily: 'GTMI' }}>Stewardship</span>
+                </>
+            ),
+            description: (<>We are dedicated to refining your plan over time, supporting your family&#39;s legacy and long-term well-being.</>),
+        },
+        {
             image: beach,
             title: (
                 <>
@@ -30,15 +39,6 @@ const Carousel = () => {
                 </>
             ),
             description: (<>Relationships are at the core of our business. We start by listening to understand your family&#39;s goals and working with you to develop wealth management solutions that meet your specific needs, communicating clearly and educating you every step of the way. </>),
-        },
-        {
-            image: farm,
-            title: (
-                <>
-                    Ensuring <span style={{ fontFamily: 'GTMI' }}>Thoughtful Stewardship</span>
-                </>
-            ),
-            description: (<>We are dedicated to refining your plan over time, supporting your family&#39;s legacy and long-term well-being.</>),
         },
         {
             image: bridge,

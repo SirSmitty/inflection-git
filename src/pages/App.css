@@ -903,6 +903,11 @@ _:future,
     padding-bottom: 10px;
   }
 
+  .combined-bg-wrapper {
+    margin-top: -100px;
+    height: 100px;
+  }
+
   .breakLine {
     color: #cbe9e3;
   }
