@@ -106,31 +106,43 @@ function App() {
   // paralax
   useEffect(() => {
     if (!showContent) return;
-    if (isMobile) {
-      // Mobile-specific parallax effect
-      gsap.to(".paralax-section", {
-        backgroundPosition: "45% -200px", // Different parallax for mobile
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".paralax-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+    ScrollTrigger.refresh(); // Ensure triggers are recalibrated
 
-    } else {
-      gsap.to(".paralax-section", {
-        backgroundPosition: "center -200px", // Move background upward
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".paralax-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: true, // Smooth scroll effect
-        },
-      });
-    }
+    const initializeParallax = () => {
+      const target = document.querySelector(".paralax-section");
+      if (!target) {
+        console.log("no target")
+        return; // Ensure the target exists
+      }
+
+
+      if (isMobile) {
+        gsap.to(target, {
+          backgroundPosition: "45% -200px", // Different parallax for mobile
+          ease: "none",
+          scrollTrigger: {
+            trigger: target,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      } else {
+        gsap.to(target, {
+          backgroundPosition: "center -200px", // Move background upward
+          ease: "none",
+          scrollTrigger: {
+            trigger: target,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+    };
+
+    // Delay to allow rendering
+    setTimeout(initializeParallax, 100);
   }, [showContent, isMobile]);
 
   // low power useEffect
