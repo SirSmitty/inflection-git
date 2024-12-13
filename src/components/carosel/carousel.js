@@ -158,9 +158,9 @@ const Carousel = () => {
                 <div className="carousel-header">
                     <h1>Our Approach</h1>
                     <p>When working with clients we are committed to:</p>
-                    <div className='carousel-breakLine-container'>
-                        <div id='after-storyText-Break' className='carousel-breakLine'></div>
-                    </div>
+                </div>
+                <div className='carousel-breakLine-container'>
+                    <div id='after-storyText-Break' className='carousel-breakLine'></div>
                 </div>
                 {slides.map((slide, index) => (
                     <div

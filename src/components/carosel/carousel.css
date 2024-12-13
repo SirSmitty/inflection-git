@@ -20,30 +20,29 @@
     top: 30%;
     text-align: center;
     z-index: 10;
+    color: #fff;
 }
 
 .carousel-header h1 {
     font-family: 'GTMI';
     font-size: 3rem;
     margin-bottom: 0px;
-    color: #ccc;
 }
 
 .carousel-header p {
     margin-top: 0px;
     margin-bottom: var(--vertical-spacing);
     font-size: 1.25rem;
-    color: #ccc;
+
 }
 
 .carousel-breakLine-container {
     position: absolute;
     display: flex;
     justify-content: center;
-    margin-top: auto;
+    margin-bottom: auto;
     z-index: 10;
-    padding-top: 7%;
-    padding-bottom: 7%;
+    top: 50%;
     width: 100%;
 }
 
@@ -101,7 +100,7 @@
     top: 50%;
     width: 100%;
     z-index: 2;
-    color: #ccc;
+    color: #fff;
     opacity: 1;
     /* We let GSAP control initial fade. */
 }
@@ -129,6 +128,7 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    color: #ccc;
 }
 
 .left-arrow {
