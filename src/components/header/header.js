@@ -64,7 +64,7 @@ const HeaderComponent = ({ smoother }) => {
                 className={`header-header-container ${isScrolled ? "scrolled" : ""}`}
             >
                 <div className="wordmark-header">
-                    <a onClick={() => (window.location.href = "/")} target="_blank">
+                    <a href="/">
                         <img
                             src={isMobile ? whiteLogo : wordmarkwL}
                             alt="Inflection Wordmark"
