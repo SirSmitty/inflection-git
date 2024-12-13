@@ -11,7 +11,6 @@ import FooterComponent from '../components/footer/footer';
 import HeaderComponent from '../components/header/header';
 
 import backgroundjpg from '../assets/BG2.jpg';
-import opener from '../assets/mainInfo/opener.png';
 import homePageHeader from '../assets/homePageHeader.svg';
 import wordmark from '../assets/wordmark.svg';
 import poi1 from '../assets/mainInfo/portfolio/poi1.png';
@@ -27,7 +26,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
 function App() {
   const [showContent, setshowContent] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [lowPower, setLowPower] = useState(false)
   const [fadeOut, setFadeOut] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
@@ -718,7 +716,6 @@ function App() {
       </>
       ) : (
         <>
-
           <div className="App">
             {!showContent && (
               <>

@@ -802,7 +802,7 @@ _:future,
   }
 
   .combined-bg {
-    margin-top: -140px;
+    margin-top: -100px;
   }
 
   .paralax-section {
@@ -827,7 +827,7 @@ _:future,
   .paralax-section {
     background-image: url('../assets/logos/mobileParalax.jpg');
     background-position: 45% 50%;
-    background-position-y: -100px !important;
+    background-position-y: -10px !important;
   }
 
   .storyInflec {
@@ -864,6 +864,10 @@ _:future,
   .breakLine-container {
     margin-top: 15%;
     margin-bottom: 15%;
+  }
+
+  .story-of-page {
+    margin-top: -25px;
   }
 
   .theWys {
