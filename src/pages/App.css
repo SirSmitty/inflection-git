@@ -343,7 +343,7 @@
 .theWys {
   color: #d2e9e4;
   width: 90%;
-  height: 60vh;
+  height: auto;
   display: flex;
   flex-direction: row;
   gap: 5rem;
