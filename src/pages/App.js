@@ -41,6 +41,7 @@ function App() {
   const headlineRef = useRef(null); // Reference for the main headline
   const paragraphRef = useRef(null); // Reference for the paragraph
   const theWysRef = useRef(null);
+  const storyTextRef = useRef(null);
 
   const aboutUsRef = useRef(null);
   const contactRef = useRef(null);
@@ -257,6 +258,12 @@ function App() {
         },
       });
 
+      tl.from(".story-text", {
+        opacity: 0,
+        y: 50, // Move upward by 50px
+        duration: 0.8,
+        ease: "power2.out",
+      });
       // Animate headline characters
       tl.from(splitHeadline.chars, {
         opacity: 0,
@@ -553,7 +560,7 @@ function App() {
                           <div className='story-image'>
                             <img src={logoWhite} alt='story' />
                           </div>
-                          <div className='story-text'>
+                          <div className='story-text' ref={storyTextRef}>
                             <h1 ref={headlineRef}>
                               The Story of <span style={{ fontFamily: 'GTMI' }}>Inflection</span>
                             </h1>
