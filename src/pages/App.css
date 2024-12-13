@@ -15,6 +15,10 @@
   position: relative;
   overflow: hidden;
   scroll-behavior: smooth;
+  background-image: url('../assets/mainInfo/standByPhoto.png');
+  /* background-color: #032b20; */
+  z-index: 0;
+
 }
 
 .App-container {
@@ -49,6 +53,16 @@
   height: 100%;
   object-fit: cover;
   z-index: -1;
+}
+
+.intro-content-container {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+  /* Adjust duration and easing as needed */
+}
+
+.intro-content-container.fade-out {
+  opacity: 0;
 }
 
 .content-container {
@@ -146,6 +160,13 @@
   width: 100%;
   height: 100%;
   overflow-x: hidden;
+  background-color: #02231a;
+  opacity: 0;
+  transition: opacity 1s linear;
+}
+
+.main-content.fade-in {
+  opacity: 1;
 }
 
 .paralax-section {
@@ -185,7 +206,7 @@
 }
 
 .combined-bg {
-  margin-top: -250px;
+  margin-top: -270px;
   position: fixed;
   height: 300px;
   width: 100%;
@@ -318,21 +339,21 @@
 
 .theWys .why h1 {
   font-family: 'RoobertoL';
-  font-size: 2.5rem;
+  font-size: 2.6vw;
   margin-bottom: 0px;
 }
 
 .theWys .why h3 {
   font-family: 'GTMI';
   color: #5fb0af;
-  font-size: 2.25rem;
+  font-size: 2.2vw;
   margin-bottom: 0px;
   margin-top: 0px;
 }
 
 .theWys .why p {
   padding-left: 5%;
-  font-size: 1.25rem;
+  font-size: 1.2vw;
   text-align: left;
 }
 
@@ -345,21 +366,21 @@
 
 .theWys .what h1 {
   font-family: 'RoobertoL';
-  font-size: 2.5rem;
+  font-size: 2.6vw;
   margin-bottom: 0px;
 }
 
 .theWys .what h3 {
   font-family: 'GTMI';
   color: #5fb0af;
-  font-size: 2.25rem;
+  font-size: 2.2vw;
   margin-bottom: 0px;
   margin-top: 0px;
 }
 
 .theWys .what p {
   padding-left: 5%;
-  font-size: 1.25rem;
+  font-size: 1.2vw;
   text-align: left;
 }
 
@@ -373,21 +394,21 @@
 
 .theWys .how h1 {
   font-family: 'RoobertoL';
-  font-size: 2.5rem;
+  font-size: 2.6vw;
   margin-bottom: 0px;
 }
 
 .theWys .how h3 {
   font-family: 'GTMI';
   color: #5fb0af;
-  font-size: 2.25rem;
+  font-size: 2.2vw;
   margin-bottom: 0px;
   margin-top: 0px;
 }
 
 .theWys .how p {
   padding-left: 5%;
-  font-size: 1.25rem;
+  font-size: 1.2vw;
   text-align: left;
 }
 
@@ -795,6 +816,10 @@ _:future,
     .combined-bg {
       background-attachment: initial;
     }
+  }
+
+  .video-bg {
+    z-index: 0;
   }
 
   .wordmark-header img {

@@ -44,6 +44,15 @@ function App() {
   const contactRef = useRef(null);
 
 
+  const [shouldFadeIn, setShouldFadeIn] = useState(false);
+  useEffect(() => {
+    if (showContent) {
+      // Wait for the next frame to add the fade-in class
+      requestAnimationFrame(() => {
+        setShouldFadeIn(true);
+      });
+    }
+  }, [showContent]);
 
   const handleButtonClick = () => {
     setFadeOut(true); // Trigger fade-out animation
@@ -126,22 +135,23 @@ function App() {
 
   // low power useEffect
   useEffect(() => {
+
     const videoElement = document.getElementById("background-video");
+    if (!videoElement) return;
 
-    const checkVideoPlayback = async () => {
-      try {
-        await videoElement.play();
-        setLowPower(false);
-      } catch (error) {
-        setLowPower(true);
-      }
-    };
+    setTimeout(() => {
+      const attemptPlay = async () => {
+        try {
+          await videoElement.play();
+          setLowPower(false);
+        } catch (error) {
+          console.log(error);
+          setLowPower(true);
+        }
+      };
+      attemptPlay()
+    }, 1000)
 
-    checkVideoPlayback();
-
-    return () => {
-      // Cleanup if necessary
-    };
   }, []);
 
   // smoothscroll useEffect
@@ -459,35 +469,37 @@ function App() {
             <div className="App">
               {!showContent && (
                 <>
-                  {lowPower ? (
-                    <img
-                      className="video-bg"
-                      src={backgroundjpg}
-                      alt="Background"
-                    />
-                  ) : (
-                    <video
-                      id='background-video'
-                      className="video-bg"
-                      autoPlay loop muted playsInline>
-                      <source src={backgroundVideo} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  )}
-                  <div className="bg-noise" style={{ opacity: '1' }}></div>
-                  <div className={`content-container ${fadeOut ? 'fade-out' : ''}`}>
-                    <div className="App-content">
-                      <img src={homePageHeader} width={'30%'} height={'auto'} alt='HomeHeader' />
-                      <button onClick={handleButtonClick} className="nav-link">
-                        Enter Now
-                      </button>
+                  <div className={`intro-content-container ${fadeOut ? 'fade-out' : ''}`}>
+                    {lowPower ? (
+                      <img
+                        className="video-bg"
+                        src={backgroundjpg}
+                        alt="Background"
+                      />
+                    ) : (
+                      <video
+                        id='background-video'
+                        className="video-bg"
+                        autoPlay loop muted playsInline>
+                        <source src={backgroundVideo} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    )}
+                    <div className="bg-noise" style={{ opacity: '1' }}></div>
+                    <div className={`content-container ${fadeOut ? 'fade-out' : ''}`}>
+                      <div className="App-content">
+                        <img src={homePageHeader} width={'30%'} height={'auto'} alt='HomeHeader' />
+                        <button onClick={handleButtonClick} className="nav-link">
+                          Enter Now
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </>
               )}
               {showContent && (
                 <>
-                  <div className='main-content' id="smooth-content" >
+                  <div className={`main-content ${shouldFadeIn ? 'fade-in' : ''}`} id="smooth-content">
                     <div className="paralax-section" style={{ position: 'relative', overflow: 'hidden' }}>
                       <div className="wordmark">
                         <img src={wordmark} alt="Inflection Wordmark" />
@@ -719,35 +731,37 @@ function App() {
           <div className="App">
             {!showContent && (
               <>
-                {lowPower ? (
-                  <img
-                    className="video-bg"
-                    src={backgroundjpg}
-                    alt="Background"
-                  />
-                ) : (
-                  <video
-                    id='background-video'
-                    className="video-bg"
-                    autoPlay loop muted playsInline>
-                    <source src={backgroundVideo} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                )}
-                <div className="bg-noise" style={{ opacity: '1' }}></div>
-                <div className={`content-container ${fadeOut ? 'fade-out' : ''}`}>
-                  <div className="App-content">
-                    <img src={homePageHeader} width={'30%'} height={'auto'} alt='HomeHeader' />
-                    <button onClick={handleButtonClick} className="nav-link">
-                      Enter Now
-                    </button>
+                <div className={`intro-content-container ${fadeOut ? 'fade-out' : ''}`}>
+                  {lowPower ? (
+                    <img
+                      className="video-bg"
+                      src={backgroundjpg}
+                      alt="Background"
+                    />
+                  ) : (
+                    <video
+                      id='background-video'
+                      className="video-bg"
+                      autoPlay loop muted playsInline preload="auto">
+                      <source src={backgroundVideo} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
+                  <div className="bg-noise" style={{ opacity: '1' }}></div>
+                  <div className={`content-container ${fadeOut ? 'fade-out' : ''}`}>
+                    <div className="App-content">
+                      <img src={homePageHeader} width={'30%'} height={'auto'} alt='HomeHeader' />
+                      <button onClick={handleButtonClick} className="nav-link">
+                        Enter Now
+                      </button>
+                    </div>
                   </div>
                 </div>
               </>
             )}
             {showContent && (
               <>
-                <div className='main-content' id="smooth-content" >
+                <div className={`main-content ${shouldFadeIn ? 'fade-in' : ''}`} id="smooth-content">
                   <div className="paralax-section" style={{ position: 'relative', overflow: 'hidden' }}>
                     <div className="wordmark">
                       <img src={wordmark} alt="Inflection Wordmark" />

@@ -43,6 +43,7 @@
     margin-top: auto;
     z-index: 10;
     padding-top: 7%;
+    padding-bottom: 7%;
     width: 100%;
 }
 
@@ -50,11 +51,14 @@
     width: 50%;
     height: 2px;
     border-radius: 20px;
+
     opacity: 0.7;
     background-color: #ccc;
 }
 
 .carousel-slide-container {
+    display: flex;
+    justify-content: center;
     position: relative;
     width: 100%;
     height: 100%;
@@ -93,7 +97,7 @@
     align-items: center;
     text-align: center;
     position: absolute;
-    margin-top: var(--vertical-spacing);
+    margin-top: 3.1vw;
     top: 48%;
     width: 100%;
     z-index: 2;
