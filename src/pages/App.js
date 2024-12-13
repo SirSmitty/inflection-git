@@ -11,6 +11,7 @@ import FooterComponent from '../components/footer/footer';
 import HeaderComponent from '../components/header/header';
 
 import backgroundjpg from '../assets/BG2.jpg';
+import bottomParalax from '../assets/mainInfo/paralaxBottom.png';
 import homePageHeader from '../assets/homePageHeader.svg';
 import wordmark from '../assets/wordmark.svg';
 import poi1 from '../assets/mainInfo/portfolio/poi1.png';
@@ -31,6 +32,7 @@ function App() {
   const [statusMessage, setStatusMessage] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
+  const [isImageLoaded, setImageLoaded] = useState(false);
   const [smoother, setSmoother] = useState(null);
 
   const contactPageRef = useRef(null);
@@ -45,6 +47,11 @@ function App() {
 
 
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
   useEffect(() => {
     if (showContent) {
       // Wait for the next frame to add the fade-in class
@@ -100,6 +107,12 @@ function App() {
     return () => {
       window.removeEventListener('resize', updateIsMobile);
     };
+  }, []);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = bottomParalax;
+    img.onload = () => setImageLoaded(true);
   }, []);
 
 
@@ -526,7 +539,15 @@ function App() {
                       </div>
                     </div>
                     <div className='main-content-container'>
-                      <div class="combined-bg"></div>
+                      {/* Combined Background */}
+                      <div className={`combined-bg-wrapper ${isImageLoaded ? "loaded" : ""}`}>
+                        <img
+                          src={bottomParalax} // Replace with your image path
+                          alt="Parallax Background"
+                          className="combined-bg-img"
+                          onLoad={handleImageLoad}
+                        />
+                      </div>
                       <div className="story-of-page" id='about' ref={aboutUsRef}>
                         <div className='storyInflec'>
                           <div className='story-image'>

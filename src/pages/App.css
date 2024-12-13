@@ -205,18 +205,46 @@
   background-color: transparent;
 }
 
-.combined-bg {
-  margin-top: -270px;
+.combined-bg-wrapper {
   position: fixed;
-  height: 300px;
+  margin-top: -270px;
   width: 100%;
-  z-index: 0;
-  /* Adjust this to ensure it is above the background but below any content */
-  background-image: url('../assets/mainInfo/paralaxBottom.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: top;
+  height: 300px;
+  z-index: 3;
+
+  /* Initial hidden state */
+  opacity: 0;
+  transform: translateY(50px);
+  -webkit-transition: opacity 0.5s ease, transform 0.5s ease;
+  /* Safari */
+  -moz-transition: opacity 0.5s ease, transform 0.5s ease;
+  /* Older Firefox */
+  -o-transition: opacity 0.5s ease, transform 0.5s ease;
+  /* Older Opera */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  will-change: opacity, transform;
+}
+
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .combined-bg-wrapper {
+      transform: translateY(0);
+      /* Avoid initial flicker */
+    }
+  }
+}
+
+.combined-bg-wrapper.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.combined-bg-img {
+  object-position: top;
+  will-change: opacity, transform;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .infoBottom {
@@ -277,13 +305,9 @@
 }
 
 #inflectionStory {
-  /* font-family: 'GTMI'; */
   display: inline;
-  /* Ensure it doesn't create its own block */
   white-space: inherit;
-  /* Inherit wrapping behavior */
   line-height: inherit;
-  /* Ensure consistent line height */
 }
 
 .storyInflec .story-image {
