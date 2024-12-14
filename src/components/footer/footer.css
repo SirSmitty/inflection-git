@@ -45,7 +45,7 @@
     padding: 10px;
     font-size: 0.9rem;
     line-height: 1.5;
-    text-align: justify;
+    text-align: left;
 }
 
 .footer-disclosure a {
@@ -64,6 +64,10 @@
         gap: 20px;
         flex-direction: column;
         padding-bottom: 20px;
+    }
+
+    .pdf-container a {
+        padding-left: 0px;
     }
 
     .footer-section {
