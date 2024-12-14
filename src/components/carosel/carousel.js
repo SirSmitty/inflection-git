@@ -14,7 +14,7 @@ import { SplitText } from '../../components/gsap-premium/src/SplitText';
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
 const Carousel = () => {
-    const [currentSlide, setCurrentSlide] = useState(1); // Start at the first actual slide
+    const [currentSlide, setCurrentSlide] = useState(0); // Start at the first actual slide
     const [isAnimating, setIsAnimating] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const headlineRefs = useRef([]); // Array of refs for headlines
@@ -22,15 +22,6 @@ const Carousel = () => {
     const splitInstances = useRef([]); // Store SplitText instances for cleanup
 
     const slides = useMemo(() => [
-        {
-            image: farm,
-            title: (
-                <>
-                    Generational <span style={{ fontFamily: 'GTMI' }}>Stewardship</span>
-                </>
-            ),
-            description: (<>We are dedicated to refining your plan over time, supporting your family&#39;s legacy and long-term well-being.</>),
-        },
         {
             image: beach,
             title: (
@@ -48,6 +39,15 @@ const Carousel = () => {
                 </>
             ),
             description: (<>At the foundation of asset protection, we integrate estate planning, tax strategies and advanced investment solutions in a clear manner that is focused on your best interests.</>),
+        },
+        {
+            image: farm,
+            title: (
+                <>
+                    Generational <span style={{ fontFamily: 'GTMI' }}>Stewardship</span>
+                </>
+            ),
+            description: (<>We are dedicated to refining your plan over time, supporting your family&#39;s legacy and long-term well-being.</>),
         },
     ], []);
 
