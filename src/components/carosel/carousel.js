@@ -4,6 +4,7 @@ import leftArrow from '../../assets/mainInfo/carousel/leftArrow.svg';
 import rightArrow from '../../assets/mainInfo/carousel/rightArrow.svg';
 import beach from '../../assets/mainInfo/carousel/beach_copy.jpg';
 import bridge from '../../assets/mainInfo/carousel/bridge.jpg';
+import tempCaro from '../../assets/mainInfo/carousel/tempCaro.png';
 import farm from '../../assets/mainInfo/carousel/farm_copy.jpg';
 import { gsap } from 'gsap';
 import { useSwipeable } from "react-swipeable";
@@ -48,6 +49,15 @@ const Carousel = () => {
                 </>
             ),
             description: (<>We are dedicated to refining your plan over time, supporting your family&#39;s legacy and long-term well-being.</>),
+        },
+        {
+            image: tempCaro,
+            title: (
+                <>
+                    Alignment of <span style={{ fontFamily: 'GTMI' }}>Ownership</span>
+                </>
+            ),
+            description: (<>We believe our people are our biggest assets. By having a highly engaged and aligned team, relationships will avoid disruption and be able to flourish. This is why employees of Inflection have the opportunity to participate in the equity upside of our business, which reinforces stewardship of your legacy and ours.</>),
         },
     ], []);
 
