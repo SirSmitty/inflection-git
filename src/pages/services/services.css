@@ -1,0 +1,294 @@
+/* Parent Element */
+body,
+html {
+    overflow-x: hidden;
+    /* Prevent horizontal scroll bar */
+}
+
+.services-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #08241c;
+    color: #c5e6e1;
+    height: auto;
+    /* Change to auto to allow content to expand */
+    min-height: 100vh;
+    /* Ensure it takes at least the full viewport height */
+    width: 100vw;
+    overflow: hidden;
+    /* Prevent horizontal scroll bar */
+    align-content: center;
+    /* Add padding for responsiveness */
+}
+
+.services-container h1 {
+    color: #c5e6e1;
+    font-family: 'GTMI';
+}
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: white;
+}
+
+/* svg {
+    background: none !important;
+    overflow: visible !important;
+} */
+
+/* svg text {
+    transform: rotate(calc(var(--rotation, 0deg)));
+    transform-origin: center center;
+    transform-box: fill-box;
+    transition: transform 5s ease-in-out;
+} */
+
+
+.services-title {
+    position: absolute;
+    top: 10%;
+    z-index: 1;
+    /* Adjust margin to be under the header */
+    font-size: 3rem;
+    /* Increased font size */
+    text-align: center;
+}
+
+.services-title::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(197, 230, 225, 0.502);
+    margin: 15px auto 0;
+    /* Adjust margin as needed */
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+    min-height: 700px;
+    height: 90vh;
+    width: 100%;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.info-text {
+    color: #c5e6e1;
+    font-family: "GTM";
+    font-size: 1.2rem;
+}
+
+/* .slice path {
+    filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.4));
+} */
+
+.services-fixed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: #08241c;
+    color: #c5e6e1;
+    z-index: 100;
+}
+
+.services-fixed-header .header-nav-link {
+    color: rgba(197, 230, 225);
+    /* Set header link color to white */
+}
+
+.services-fixed-header .header-nav-link:hover {
+    color: rgba(197, 230, 225);
+    /* Set header link color to white on hover */
+}
+
+.services-fixed-header .wordmark-header a {
+    /* invert svg color to white */
+    filter: invert(99%) sepia(94%) saturate(28%) hue-rotate(52deg) brightness(106%) contrast(100%);
+}
+
+/* Adjustments for medium screens */
+@media screen and (max-width: 1199px) and (min-width: 992px) {
+    /* .chart-container {
+        transform: scale(1.5);
+    } */
+
+    .services-title {
+        font-size: 2.25rem;
+    }
+
+    .info-text {
+        font-size: 1.4vw;
+        y: 0;
+    }
+
+    .center-title {
+        font-size: 1.45vw;
+    }
+
+    .slice-label {
+        font-size: 1.2vw;
+    }
+}
+
+/* Adjustments for medium-large screens */
+@media screen and (max-width: 1439px) and (min-width: 1200px) {
+    /* .chart-container {
+        transform: scale(0.9);
+    } */
+
+
+    .info-text {
+        font-size: 1.3vw;
+    }
+
+    .center-title {
+        font-size: 1.35vw;
+    }
+
+    .slice-label {
+        font-size: 1.1vw;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .chart-container {
+        transform: scale(1);
+        transition: transform 0.3s ease;
+    }
+
+    .services-title {
+        font-size: 3rem;
+    }
+
+    .info-text {
+        font-size: 1.2vw;
+    }
+
+    .center-title {
+        font-size: 1.25vw;
+    }
+
+    .slice-label {
+        font-size: 1vw;
+    }
+}
+
+@media (max-width: 992px) {
+    .services-title {
+        font-size: 2rem;
+    }
+
+    .info-text {
+        font-size: 1rem;
+    }
+}
+
+.accordion-container {
+    display: none;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+    .services-container {
+        justify-content: flex-start;
+        /* Adjust to start content from the top */
+        height: auto;
+        /* Allow the container to expand with content */
+        min-height: 100vh;
+        /* Ensure it takes at least the full viewport height */
+    }
+
+    .services-title {
+        position: relative;
+        /* Change to relative positioning */
+        top: 0;
+        /* Reset top positioning */
+        margin-top: 20px;
+        /* Adjust margin to reduce spacing */
+        font-size: 2rem;
+    }
+
+    .chart-container {
+        display: none;
+        /* Hide pie chart on mobile */
+    }
+
+    .accordion-container {
+        overflow: hidden;
+        display: block;
+        /* Show accordion */
+        width: 80%;
+        max-width: 400px;
+        margin-bottom: 20px;
+        /* Add margin to ensure space between accordion and footer */
+    }
+
+    .accordion-item {
+        border-top: 2px solid rgb(197, 230, 225, 0.502);
+        padding: 10px;
+    }
+
+    .accordion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.2rem;
+        font-family: 'GTM';
+        font-weight: bold;
+        padding: 10px 0;
+    }
+
+    .accordion-icon {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    /* Smooth Slide Animation */
+    .accordion-content {
+        overflow: hidden;
+        max-height: 0;
+        /* Start with 0 height */
+        opacity: 0;
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+
+    /* When section is open, reveal content */
+    .accordion-item.open .accordion-content {
+        max-height: 500px;
+        /* Adjust as needed */
+        opacity: 1;
+    }
+
+    .accordion-content p {
+        margin: 5px 0;
+        padding: 5px 10px;
+        color: #75b2b2;
+        font-size: 1rem;
+        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    }
+
+    /* Fade-in effect for individual points */
+    .accordion-item.open .accordion-content p {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    /* Initially, move text slightly up and make it invisible */
+    .accordion-content p {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+}
