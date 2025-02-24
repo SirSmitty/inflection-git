@@ -4,7 +4,7 @@ import leftArrow from '../../assets/mainInfo/carousel/leftArrow.svg';
 import rightArrow from '../../assets/mainInfo/carousel/rightArrow.svg';
 import beach from '../../assets/mainInfo/carousel/beach_copy.jpg';
 import bridge from '../../assets/mainInfo/carousel/bridge.jpg';
-import tempCaro from '../../assets/mainInfo/carousel/tempCaro.png';
+import Abstraction from '../../assets/mainInfo/carousel/BG4.jpg';
 import farm from '../../assets/mainInfo/carousel/farm_copy.jpg';
 import { gsap } from 'gsap';
 import { useSwipeable } from "react-swipeable";
@@ -51,7 +51,7 @@ const Carousel = () => {
             description: (<>We are dedicated to refining your plan over time, supporting your family&#39;s legacy and long-term well-being.</>),
         },
         {
-            image: tempCaro,
+            image: Abstraction,
             title: (
                 <>
                     Alignment of <span style={{ fontFamily: 'GTMI' }}>Ownership</span>

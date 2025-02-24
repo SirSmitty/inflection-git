@@ -486,7 +486,7 @@ function App() {
           } else {
             console.log("element not found");
           }
-        }, 100); // 100ms delay to allow layout to update
+        }, 1000); // 100ms delay to allow layout to update
       }
 
       return newSection;
