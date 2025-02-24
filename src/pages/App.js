@@ -445,7 +445,7 @@ function App() {
     // Send form data using EmailJS
     emailjs
       .send(
-        'service_8dm28zu',
+        'service_uyqaa4a',
         'template_qieihix',
         formData,
         '9FNfIOJuuQMEP7Fpp'
@@ -565,7 +565,7 @@ function App() {
                               The Story of <span style={{ fontFamily: 'GTMI' }}>Inflection</span>
                             </h1>
                             <p ref={paragraphRef}>
-                              <span style={{ fontFamily: 'GTMI' }} id='inflectionStory'>Inflection Capital Management</span>{" "}is a partner-owned and operated multi-family office based in Silicon Valley, dedicated to working with clients to preserve and grow their wealth and legacy. Our careers have been dedicated to working with wealth creators, families navigating periods of transition, and family offices, including their foundations. With a commitment to personal connection and a deep understanding of our clients' unique goals, we serve as trusted stewards for generations to come.
+                              <span style={{ fontFamily: 'GTMI' }} id='inflectionStory'>Inflection Capital Management</span>{" "} is a partner-owned and operated multi-family office based in Silicon Valley, dedicated to working with clients to preserve and grow their wealth and legacy. Our careers have been dedicated to working with wealth creators, families navigating periods of transition, and family offices, including their foundations. With a commitment to personal connection and a deep understanding of our clients&#39; unique goals, we serve as trusted stewards for generations to come.
                             </p>
                           </div>
                         </div>

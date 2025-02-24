@@ -8,6 +8,7 @@ const HeaderComponent = ({ smoother }) => {
     const [isMobile, setIsMobile] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     // Check if the device is mobile
     useEffect(() => {
@@ -58,13 +59,25 @@ const HeaderComponent = ({ smoother }) => {
         }
     };
 
+    const handleWordmarkClick = (e) => {
+        if (isMobile) {
+            e.preventDefault();
+            setMobileMenuOpen(!mobileMenuOpen);
+        }
+    };
+
+    const handleNavClick = (path) => {
+        setMobileMenuOpen(false);
+        window.location.href = path;
+    };
+
     return (
         <>
             <header
                 className={`header-header-container ${isScrolled ? "scrolled" : ""}`}
             >
                 <div className="wordmark-header">
-                    <a href="/">
+                    <a href="/" onClick={handleWordmarkClick}>
                         <img
                             src={isMobile ? whiteLogo : wordmarkwL}
                             alt="Inflection Wordmark"
@@ -93,6 +106,9 @@ const HeaderComponent = ({ smoother }) => {
                                 <button onClick={() => smoothScrollTo('#services')} className="header-nav-link">Services</button>
                             </li> */}
                             <li>
+                                <button onClick={() => (window.location.href = "/services")} className="header-nav-link">Services</button>
+                            </li>
+                            <li>
                                 <button onClick={() => smoothScrollTo('#about')} className="header-nav-link">About Us</button>
                             </li>
                             <li>
@@ -101,6 +117,27 @@ const HeaderComponent = ({ smoother }) => {
                         </ul>
                     </nav>
                 </div>
+
+                {/* Mobile Full Screen Menu */}
+                {isMobile && (
+                    <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
+                        <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <nav className="mobile-menu-nav">
+                            <ul className="mobile-menu-list">
+                                <li>
+                                    <button onClick={() => handleNavClick('/')} className="mobile-menu-link">Home</button>
+                                </li>
+                                <li>
+                                    <button onClick={() => handleNavClick('/services')} className="mobile-menu-link">Services</button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                )}
             </header>
         </>
     );
