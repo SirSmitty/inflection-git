@@ -14,6 +14,7 @@ import { SplitText } from '../../components/gsap-premium/src/SplitText';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
+// commented on car
 const Carousel = () => {
     const [currentSlide, setCurrentSlide] = useState(0); // Start at the first actual slide
     const [isAnimating, setIsAnimating] = useState(false);
