@@ -89,9 +89,9 @@ html {
     font-size: 1.2rem;
 }
 
-/* .slice path {
-    filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.4));
-} */
+.slice path {
+    cursor: pointer;
+}
 
 .services-fixed-header {
     display: flex;
@@ -207,7 +207,7 @@ html {
         /* Adjust to start content from the top */
         height: auto;
         /* Allow the container to expand with content */
-        min-height: 100vh;
+        min-height: 80vh;
         /* Ensure it takes at least the full viewport height */
     }
 
@@ -232,7 +232,7 @@ html {
         /* Show accordion */
         width: 80%;
         max-width: 400px;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
         /* Add margin to ensure space between accordion and footer */
     }
 

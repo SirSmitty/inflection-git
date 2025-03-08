@@ -34,6 +34,8 @@ const HeaderComponent = ({ smoother }) => {
 
                 const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
                 const isTaking80Percent = visibleHeight / viewportHeight >= 0.7;
+                console.log(visibleHeight)
+                console.log(isTaking80Percent)
                 setIsScrolled(isTaking80Percent);
             }
         };
@@ -49,13 +51,31 @@ const HeaderComponent = ({ smoother }) => {
 
 
     const smoothScrollTo = (sectionId) => {
+        if (window.location.pathname !== "/") {
+            window.location.href = `/${sectionId}`;
+            return;
+        }
+
         if (smoother) {
-            const target = document.querySelector(sectionId);
-            if (target) {
-                // scrollTo(element, smooth, position)
-                smoother.scrollTo(target, true, "top");
-                setMenuOpen(false);
-            }
+            setTimeout(() => {
+                const target = document.querySelector(sectionId);
+                if (target) {
+                    smoother.scrollTo(target, true, "top");
+                    setMenuOpen(false);
+
+                    // Add a delay to check scroll position after smooth scroll completes
+                    setTimeout(() => {
+                        const target = document.querySelector('.main-content-container');
+                        if (target) {
+                            const viewportHeight = window.innerHeight;
+                            const rect = target.getBoundingClientRect();
+                            const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+                            const isTaking80Percent = visibleHeight / viewportHeight >= 0.7;
+                            setIsScrolled(isTaking80Percent);
+                        }
+                    }, 1000); // Adjust timing if needed to match your scroll animation duration
+                }
+            });
         }
     };
 

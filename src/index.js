@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 // internal
 import './index.css';
 import App from './pages/App';
-import Contact from './pages/contact/contact';
+// import Contact from './pages/contact/contact';
 import PrivacyPolicy from './pages/privacyPolicy/privacy';
 import Services from './pages/services/services';
 
@@ -16,7 +16,7 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<App />} />  {/* Homepage */}
-        <Route path="/contact" element={<Contact />} />  {/* Contact page */}
+        {/* <Route path="/contact" element={<Contact />} />  Contact page */}
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />  {/* Contact page */}
         <Route path="/services" element={<Services />} />  {/* Contact page */}
       </Routes>
