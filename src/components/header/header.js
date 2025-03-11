@@ -10,6 +10,37 @@ const HeaderComponent = ({ smoother }) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    // Function to check scroll position and update header state
+    const checkScrollPosition = () => {
+        const target = document.querySelector('.main-content-container');
+        console.log("ACTIVATED")
+        if (target) {
+            const viewportHeight = window.innerHeight;
+            const rect = target.getBoundingClientRect();
+            const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+            const isTaking80Percent = visibleHeight / viewportHeight >= 0.7;
+            setIsScrolled(isTaking80Percent);
+        }
+    };
+
+    // Check for stored scroll target on mount
+    useEffect(() => {
+        const scrollTarget = sessionStorage.getItem('scrollTarget');
+        if (scrollTarget && smoother) {
+            // Clear the stored target
+            sessionStorage.removeItem('scrollTarget');
+            // Wait for the page to be fully rendered
+            setTimeout(() => {
+                const target = document.querySelector(scrollTarget);
+                if (target) {
+                    smoother.scrollTo(target, true, "top");
+                    // Check scroll position after the scroll animation
+                    setTimeout(checkScrollPosition, 1000);
+                }
+            }, 500);
+        }
+    }, [smoother]);
+
     // Check if the device is mobile
     useEffect(() => {
         const updateIsMobile = () => {
@@ -25,34 +56,21 @@ const HeaderComponent = ({ smoother }) => {
     }, []);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const target = document.querySelector('.main-content-container');
-
-            if (target) {
-                const viewportHeight = window.innerHeight;
-                const rect = target.getBoundingClientRect();
-
-                const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-                const isTaking80Percent = visibleHeight / viewportHeight >= 0.7;
-                console.log(visibleHeight)
-                console.log(isTaking80Percent)
-                setIsScrolled(isTaking80Percent);
-            }
-        };
-
         // Trigger on load and on scroll
-        handleScroll(); // Initial check
-        window.addEventListener('scroll', handleScroll);
+        checkScrollPosition(); // Initial check
+        window.addEventListener('scroll', checkScrollPosition);
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', checkScrollPosition);
         };
     }, []);
 
 
     const smoothScrollTo = (sectionId) => {
         if (window.location.pathname !== "/") {
-            window.location.href = `/${sectionId}`;
+            // Store the target section in sessionStorage before navigation
+            sessionStorage.setItem('scrollTarget', sectionId);
+            window.location.href = "/";
             return;
         }
 
@@ -62,18 +80,8 @@ const HeaderComponent = ({ smoother }) => {
                 if (target) {
                     smoother.scrollTo(target, true, "top");
                     setMenuOpen(false);
-
-                    // Add a delay to check scroll position after smooth scroll completes
-                    setTimeout(() => {
-                        const target = document.querySelector('.main-content-container');
-                        if (target) {
-                            const viewportHeight = window.innerHeight;
-                            const rect = target.getBoundingClientRect();
-                            const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-                            const isTaking80Percent = visibleHeight / viewportHeight >= 0.7;
-                            setIsScrolled(isTaking80Percent);
-                        }
-                    }, 1000); // Adjust timing if needed to match your scroll animation duration
+                    // Check scroll position after the scroll animation
+                    setTimeout(checkScrollPosition, 1000);
                 }
             });
         }

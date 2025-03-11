@@ -477,7 +477,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0);
   /* Initial transparent state */
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 1s ease-in-out;
 }
 
 .portfolio-container .POI1-container:hover::after {
@@ -508,7 +508,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0);
   /* Initial transparent state */
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 1s ease-in-out;
 }
 
 .portfolio-container .POI2-container:hover::after {
@@ -570,8 +570,9 @@
   border-radius: 10px;
   opacity: 0;
   transform: translateY(100%);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 1.5s ease, transform 1.5s ease;
   font-size: 1.15vw;
+  text-align: center;
   line-height: 1.5;
   z-index: 5;
 }

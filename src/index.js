@@ -12,15 +12,15 @@ import Services from './pages/services/services';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />  {/* Homepage */}
-        {/* <Route path="/contact" element={<Contact />} />  Contact page */}
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />  {/* Contact page */}
-        <Route path="/services" element={<Services />} />  {/* Contact page */}
-      </Routes>
-    </Router>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Router>
+    <Routes>
+      <Route path="/" element={<App />} />  {/* Homepage */}
+      {/* <Route path="/contact" element={<Contact />} />  Contact page */}
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />  {/* Contact page */}
+      <Route path="/services" element={<Services />} />  {/* Contact page */}
+    </Routes>
+  </Router>
+  // </React.StrictMode>
 );
 reportWebVitals();
