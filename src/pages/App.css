@@ -285,6 +285,7 @@
   width: 60%;
   color: #d2e9e4;
   margin-top: -40px;
+  z-index: 100;
 }
 
 .storyInflec .story-text h1 {
@@ -292,7 +293,6 @@
   margin-top: 0;
   font-family: 'RoobertoL';
   font-size: 4vw;
-  z-index: 100;
 }
 
 .storyInflec .story-text p {
