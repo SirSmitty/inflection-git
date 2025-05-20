@@ -171,6 +171,14 @@ const HeaderComponent = ({ smoother }) => {
                                 <li>
                                     <button onClick={() => handleNavClick('/services')} className="mobile-menu-link">Services</button>
                                 </li>
+                                <li>
+                                    <button
+                                        onClick={() => window.open('https://inflection.addepar.com', '_blank', 'noopener,noreferrer')}
+                                        className="mobile-menu-link"
+                                    >
+                                        Log In
+                                    </button>
+                                </li>
                             </ul>
                         </nav>
                     </div>
