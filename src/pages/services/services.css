@@ -77,9 +77,11 @@ html {
     transform-origin: center center;
     transition: transform 0.3s ease;
     min-height: 700px;
+    padding-top: 5%;
     height: 90vh;
     width: 100%;
     margin: 2rem auto;
+    scale: 1.25;
     position: relative;
 }
 

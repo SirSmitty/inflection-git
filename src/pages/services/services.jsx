@@ -3,7 +3,6 @@ import * as d3 from "d3";
 import "./services.css";
 import HeaderComponent from "../../components/header/header"; // Import HeaderComponent
 import FooterComponent from "../../components/footer/footer";
-import ContactForm from '../../components/contact/contact';
 
 const dataSet = [
     {
@@ -65,7 +64,7 @@ const dataSet = [
         legendLabel: "Trust, Tax \nand Estate \nPlanning",
         magnitude: 14.2,
         info: [
-            "Investment Coordination with Family Plan",
+            "Investment coordination with Family Plan",
             "Tax Minimization and Mitigation Strategies",
             "Estate Planning",
             "Document Storage",
@@ -91,6 +90,8 @@ const ServicesChart = () => {
     const currentExpanded = useRef(null); // Use ref instead of state
     const [isMobile, setIsMobile] = useState(false);
     const [openSection, setOpenSection] = useState(null);
+
+
 
     // Initialize the pie chart
     useEffect(() => {
@@ -393,39 +394,31 @@ const ServicesChart = () => {
 
                 let currentY = -totalHeight / 2;
 
-                const maxBowOut = sliceRadius * 0.05; // Maximum amount to bow out in the middle
-
+                // Render text with bullets
                 wrappedItems.forEach((lines, itemIndex) => {
-                    const itemProgress = itemIndex / (wrappedItems.length - 1);
-                    const mainBowOutAmount = Math.sin(itemProgress * Math.PI) * maxBowOut;
-
                     lines.forEach((line, lineIndex) => {
-                        // Calculate bow out amount for arc effect
-                        let bowOutAmount;
-                        if (lines.length > 1) {
-                            const lineProgress = lineIndex / (lines.length - 1);
-                            // Use a more subtle progression for wrapped lines
-                            bowOutAmount = mainBowOutAmount + (lineProgress * maxBowOut * 0.3);
-                        } else {
-                            bowOutAmount = mainBowOutAmount;
-                        }
-
                         const textElement = textContainer
                             .append("text")
                             .attr("class", "info-text")
                             .attr("y", currentY)
-                            .attr("transform", `translate(${textRadius + bowOutAmount}, 0)`)
+                            .attr("transform", `translate(${textRadius}, 0)`)
                             .style("fill", "#c5e6e1")
                             .style("font-size", fontSize)
                             .style("opacity", 0);
 
-                        // Create a single tspan for the entire line
-                        const lineContent = lineIndex === 0 ? `• ${line}` : line;
+                        if (lineIndex === 0) {
+                            textElement
+                                .append("tspan")
+                                .text("• ")
+                                .attr("dx", "0");
+                        }
+
+                        const xOffset = lineIndex === 0 ? 0 : 25;
+
                         textElement
                             .append("tspan")
-                            .text(lineContent)
-                            // Remove the dx attribute for wrapped lines
-                            .attr("dx", 0);
+                            .text(line)
+                            .attr("dx", xOffset);
 
                         textElement
                             .transition()
@@ -543,8 +536,6 @@ const ServicesChart = () => {
                     <div className="chart-container" ref={chartRef}></div> // Keep the pie chart for larger screens
                 )}
             </div>
-
-            <ContactForm />
 
             <FooterComponent />
         </>

@@ -142,6 +142,15 @@ const HeaderComponent = ({ smoother }) => {
                             <li>
                                 <button onClick={() => smoothScrollTo('#contact')} className="header-nav-link">Contact</button>
                             </li>
+                            <li>
+                                <button
+                                    onClick={() => window.open('https://inflection.addepar.com', '_blank', 'noopener,noreferrer')}
+                                    className="header-nav-link"
+                                >
+                                    Log In
+                                </button>
+                            </li>
+
                         </ul>
                     </nav>
                 </div>
