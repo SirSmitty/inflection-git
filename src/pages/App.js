@@ -445,10 +445,10 @@ function App() {
     // Send form data using EmailJS
     emailjs
       .send(
-        'service_8dm28zu',
-        'template_qieihix',
+        'service_kskk7az',
+        'template_j7ir5zf',
         formData,
-        '9FNfIOJuuQMEP7Fpp'
+        'pSlQYBFQMk4wsZrxw'
       )
       .then(
         (result) => {
