@@ -9,11 +9,11 @@ const dataSet = [
         legendLabel: "Rising \nGeneration",
         magnitude: 14.2,
         info: [
-            "Rising Gen Investment Philosophy vs. Family",
+            "Rising Generation Investment Philosophy",
             "Family Business Succession Planning",
-            "Family Board Involvement",
+            "Family Board",
             "Marriage & Prenuptial Agreements",
-            "Life & Career Coaching"
+            "Rising Generation Career Initiatives"
         ]
     },
     {
@@ -23,7 +23,7 @@ const dataSet = [
             "Foundation Investment Allocation",
             "Grant Analysis",
             "Impact Alignment",
-            "Vehicle Structuring/Formation"
+            "Vehicle Structuring & Formation"
         ]
     },
     {
@@ -40,9 +40,8 @@ const dataSet = [
         legendLabel: "Lifestyle",
         magnitude: 14.2,
         info: [
-            "Travel & Concierge",
             "Private Aviation",
-            "Collectible Insurance/Assessment",
+            "Collectible Insurance & Assessment",
             "Health & Wellness",
             "Project Management"
         ]
@@ -57,15 +56,15 @@ const dataSet = [
             "Hedging Strategies",
             "Completion Portfolio",
             "Alternative Portfolio Optimization",
-            "Co-Investment Opportunities"
+            "Direct Co-Investment Opportunities"
         ]
     },
     {
         legendLabel: "Trust, Tax \nand Estate \nPlanning",
         magnitude: 14.2,
         info: [
-            "Investment coordination with Family Plan",
-            "Tax Minimization and Mitigation Strategies",
+            "Asset Protection",
+            "Tax Mitigation Strategies & Investment Management",
             "Estate Planning",
             "Document Storage",
         ]
@@ -75,11 +74,10 @@ const dataSet = [
         magnitude: 14.2,
         info: [
             "Performance Reporting",
-            "Alternatives K-1 Aggregation",
+            "K-1 Aggregation",
             "Balance Sheet & Cash Flow",
-            "Document Storage",
             "Private Banking",
-            "Borrowing & Mortgages"
+            "Lending & Mortgages"
         ]
     }
 ];

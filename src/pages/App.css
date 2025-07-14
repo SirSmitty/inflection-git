@@ -377,9 +377,9 @@
 }
 
 .theWys .why p {
-  padding-left: 5%;
+  padding-inline: 2%;
   font-size: 1.2rem;
-  text-align: left;
+  text-align: center;
 }
 
 /* what */
@@ -404,9 +404,9 @@
 }
 
 .theWys .what p {
-  padding-left: 5%;
+  padding-inline: 2%;
   font-size: 1.2rem;
-  text-align: left;
+  text-align: center;
 }
 
 
@@ -432,9 +432,9 @@
 }
 
 .theWys .how p {
-  padding-left: 5%;
+  padding-inline: 2%;
   font-size: 1.2rem;
-  text-align: left;
+  text-align: center;
 }
 
 .carosel-container {
