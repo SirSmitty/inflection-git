@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import emailjs from '@emailjs/browser';
 import ScrollSmoother from "../components/gsap-premium/src/ScrollSmoother";
 import ScrollTrigger from "../components/gsap-premium/src/ScrollTrigger";
 import { SplitText } from '../components/gsap-premium/src/SplitText';
@@ -9,7 +8,6 @@ import './App.css';
 import backgroundVideo from '../assets/InflectionGradientBG.mp4';
 import FooterComponent from '../components/footer/footer';
 import HeaderComponent from '../components/header/header';
-
 import backgroundjpg from '../assets/BG2.jpg';
 import bottomParalax from '../assets/mainInfo/paralaxBottom.png';
 import homePageHeader from '../assets/homePageHeader.svg';
@@ -18,25 +16,23 @@ import poi1 from '../assets/mainInfo/portfolio/poi1.png';
 import poi2 from '../assets/mainInfo/portfolio/poi2.png';
 import logoWhite from '../assets/logos/logoWhite.png';
 import Carousel from '../components/carosel/carousel';
-
-
+import ContactForm from '../components/contact/contact';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
-
-
 function App() {
-  const [showContent, setshowContent] = useState(false);
+  const [showContent, setshowContent] = useState(() => {
+    // Check sessionStorage on initial render
+    return sessionStorage.getItem("hasEntered") === "true";
+  });
   const [lowPower, setLowPower] = useState(false)
   const [fadeOut, setFadeOut] = useState(false);
-  const [statusMessage, setStatusMessage] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const [isImageLoaded, setImageLoaded] = useState(false);
   const [smoother, setSmoother] = useState(null);
 
   const contactPageRef = useRef(null);
-  const formRef = useRef(null);
   const sectionRef = useRef(null); // Reference for the whole section
   const headlineRef = useRef(null); // Reference for the main headline
   const paragraphRef = useRef(null); // Reference for the paragraph
@@ -44,8 +40,6 @@ function App() {
   const storyTextRef = useRef(null);
 
   const aboutUsRef = useRef(null);
-  const contactRef = useRef(null);
-
 
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
 
@@ -64,6 +58,9 @@ function App() {
 
   const handleButtonClick = () => {
     setFadeOut(true); // Trigger fade-out animation
+    console.log("handling session storage")
+    sessionStorage.setItem("hasEntered", "true");
+    console.log(sessionStorage.getItem("hasEntered"))
     setTimeout(() => {
       setshowContent(true);
     }, 1000);
@@ -115,7 +112,6 @@ function App() {
     img.src = bottomParalax;
     img.onload = () => setImageLoaded(true);
   }, []);
-
 
   // paralax
   useEffect(() => {
@@ -240,61 +236,56 @@ function App() {
     if (!showContent) return;
     let splitHeadline;
     let splitParagraph;
+    const isReturnVisit = sessionStorage.getItem("hasEntered") === "true";
 
     const animateSplitText = () => {
       splitHeadline = new SplitText(headlineRef.current, { type: "words,chars" });
       splitParagraph = new SplitText(paragraphRef.current, { type: "lines,words", linesClass: "split-line" });
-      function allDone() {
-        splitParagraph.revert();
+
+      if (isReturnVisit) {
+        // Set elements directly to their end state
+        gsap.set(".story-text", { opacity: 1, y: 0 });
+        gsap.set(splitHeadline.chars, { opacity: 1, y: 0 });
+        gsap.set(splitParagraph.lines, { opacity: 1, y: 0 });
+      } else {
+        // Animate as normal for first visit
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none none",
+          }
+        });
+
+        tl.from(".story-text", {
+          opacity: 0,
+          y: 50,
+          duration: 0.8,
+          ease: "power2.out",
+        })
+          .from(splitHeadline.chars, {
+            opacity: 0,
+            y: 20,
+            stagger: 0.05,
+            duration: 0.6,
+            ease: "power2.out",
+          })
+          .from(splitParagraph.lines, {
+            opacity: 0,
+            y: 20,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out",
+          });
       }
-
-      // Animation timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%", // Start animation when section is 80% visible
-          end: "bottom 20%",
-          toggleActions: "play none none none", // Rewind when out of view
-        },
-      });
-
-      tl.from(".story-text", {
-        opacity: 0,
-        y: 50, // Move upward by 50px
-        duration: 0.8,
-        ease: "power2.out",
-      });
-      // Animate headline characters
-      tl.from(splitHeadline.chars, {
-        opacity: 0,
-        y: 20,
-        stagger: 0.05,
-        duration: 0.6,
-        ease: "power2.out",
-      });
-
-      // Animate paragraph lines
-      tl.from(splitParagraph.lines, {
-        opacity: 0,
-        y: 20,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "power2.out",
-        onComplete: allDone
-      });
     };
 
-    // Ensure fonts are fully loaded
     document.fonts.ready
-      .then(() => {
-        animateSplitText();
-      })
-      .catch((error) => {
-        console.error("Error loading fonts:", error);
-      });
+      .then(animateSplitText)
+      .catch(console.error);
 
     return () => {
-      // Cleanup SplitText instances
       if (splitHeadline) splitHeadline.revert();
       if (splitParagraph) splitParagraph.revert();
     };
@@ -365,53 +356,31 @@ function App() {
   // the Wys useEffect
   useEffect(() => {
     if (!showContent || !theWysRef.current) return;
-
-    // Check if mobile
+    const isReturnVisit = sessionStorage.getItem("hasEntered") === "true";
     const isMobile = window.innerWidth <= 768;
 
-    if (isMobile) {
-      // On mobile, create separate triggers for each section
-      gsap.from(theWysRef.current.querySelector('.why'), {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: theWysRef.current.querySelector('.why'),
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none none",
-        }
+    if (isReturnVisit) {
+      // Set elements directly to their end state
+      const sections = theWysRef.current.querySelectorAll(".why, .what, .how");
+      gsap.set(sections, { y: 0, opacity: 1 });
+    } else if (isMobile) {
+      // Original mobile animations for first visit
+      ['why', 'what', 'how'].forEach(className => {
+        gsap.from(theWysRef.current.querySelector(`.${className}`), {
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: theWysRef.current.querySelector(`.${className}`),
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none none",
+          }
+        });
       });
-
-      gsap.from(theWysRef.current.querySelector('.what'), {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: theWysRef.current.querySelector('.what'),
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none none",
-        }
-      });
-
-      gsap.from(theWysRef.current.querySelector('.how'), {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: theWysRef.current.querySelector('.how'),
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none none",
-        }
-      });
-
     } else {
-      // On desktop (or non-mobile), original grouped animation
+      // Original desktop animations for first visit
       const sections = theWysRef.current.querySelectorAll(".why, .what, .how");
       gsap.from(sections, {
         y: 50,
@@ -428,40 +397,6 @@ function App() {
       });
     }
   }, [showContent]);
-
-  const handleSubmit = () => {
-    // Collect form data manually
-    const formData = {
-      name: document.querySelector('[name="name"]').value,
-      phoneNumber: document.querySelector('[name="phoneNumber"]').value,
-      email: document.querySelector('[name="email"]').value,
-      message: document.querySelector('[name="message"]').value,
-    };
-
-    if (!formData.name || !formData.email || !formData.message) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-    // Send form data using EmailJS
-    emailjs
-      .send(
-        'service_kskk7az',
-        'template_j7ir5zf',
-        formData,
-        'pSlQYBFQMk4wsZrxw'
-      )
-      .then(
-        (result) => {
-          console.log('Email successfully sent!', result.text);
-          setStatusMessage('Thank you! Your message has been sent.');
-        },
-        (error) => {
-          console.error('Error sending email:', error.text);
-          setStatusMessage('Something went wrong, please try again.');
-        }
-      );
-  };
-
 
   const toggleDescription = (sectionId) => {
     setActiveSection((prevSection) => {
@@ -486,7 +421,7 @@ function App() {
           } else {
             console.log("element not found");
           }
-        }, 100); // 100ms delay to allow layout to update
+        }, 1000); // 100ms delay to allow layout to update
       }
 
       return newSection;
@@ -565,7 +500,7 @@ function App() {
                               The Story of <span style={{ fontFamily: 'GTMI' }}>Inflection</span>
                             </h1>
                             <p ref={paragraphRef}>
-                              <span style={{ fontFamily: 'GTMI' }} id='inflectionStory'>Inflection Capital Management</span>{" "}is a partner-owned and operated multi-family office based in Silicon Valley, dedicated to working with clients to preserve and grow their wealth and legacy. Our careers have been dedicated to working with wealth creators, families navigating periods of transition, and family offices, including their foundations. With a commitment to personal connection and a deep understanding of our clients' unique goals, we serve as trusted stewards for generations to come.
+                              <span style={{ fontFamily: 'GTMI' }} id='inflectionStory'>Inflection Capital Management</span>{" "} is a partner-owned and operated multi-family office based in Silicon Valley, dedicated to working with clients to preserve and grow their wealth and legacy. Our careers have been dedicated to working with wealth creators, families navigating periods of transition, and family offices, including their foundations. With a commitment to personal connection and a deep understanding of our clients&#39; unique goals, we serve as trusted stewards for generations to come.
                             </p>
                           </div>
                         </div>
@@ -688,61 +623,7 @@ function App() {
                           </div>
                         </div>
                       </div>
-                      <div className="contact-page-content" id='contact' ref={contactRef}>
-                        <div className='contact-background-overlay'></div>
-                        <div className="form-header">
-                          <h1 className="contact-title"><span style={{ fontFamily: "RoobertoL" }}>Meet with the</span> Inflection Team</h1>
-                        </div>
-
-                        <form className="contact-form" ref={formRef} onSubmit={handleSubmit}>
-                          <div className="form-row">
-                            <input
-                              type="text"
-                              name="name"
-                              placeholder="Name"
-                              className="form-input"
-                              autoComplete="off"
-                              required
-                            />
-                            <input
-                              type="text"
-                              name="phoneNumber"
-                              placeholder="Phone Number"
-                              className="form-input"
-                              autoComplete="off"
-                              required
-                            />
-                          </div>
-                          <input
-                            type="email"
-                            name="email"
-                            placeholder="Email"
-                            className="form-input"
-                            autoComplete="off"
-                            required
-                          />
-                          <div className="contact-textarea-container">
-                            <textarea
-                              name="message"
-                              placeholder="What would you like to discuss with Inflection..."
-                              className="form-textarea"
-                              autoComplete="off"
-                              required
-                            ></textarea>
-                          </div>
-                        </form>
-                        <div className="form-footer">
-                          <button onClick={handleSubmit} className="submit-button">
-                            Submit
-                          </button>
-                        </div>
-                        {statusMessage && (
-                          <div className="status-message">
-                            <p>{statusMessage}</p>
-                          </div>
-                        )}
-
-                      </div>
+                      <ContactForm />
                       <FooterComponent />
                     </div>
                   </div>
@@ -934,61 +815,7 @@ function App() {
                         </div>
                       </div>
                     </div>
-                    <div className="contact-page-content" id='contact' ref={contactRef}>
-                      <div className='contact-background-overlay'></div>
-                      <div className="form-header">
-                        <h1 className="contact-title"><span style={{ fontFamily: "RoobertoL" }}>Meet with the</span> Inflection Team</h1>
-                      </div>
-
-                      <form className="contact-form" ref={formRef} onSubmit={handleSubmit}>
-                        <div className="form-row">
-                          <input
-                            type="text"
-                            name="name"
-                            placeholder="Name"
-                            className="form-input"
-                            autoComplete="off"
-                            required
-                          />
-                          <input
-                            type="text"
-                            name="phoneNumber"
-                            placeholder="Phone Number"
-                            className="form-input"
-                            autoComplete="off"
-                            required
-                          />
-                        </div>
-                        <input
-                          type="email"
-                          name="email"
-                          placeholder="Email"
-                          className="form-input"
-                          autoComplete="off"
-                          required
-                        />
-                        <div className="contact-textarea-container">
-                          <textarea
-                            name="message"
-                            placeholder="What would you like to discuss with Inflection..."
-                            className="form-textarea"
-                            autoComplete="off"
-                            required
-                          ></textarea>
-                        </div>
-                      </form>
-                      <div className="form-footer">
-                        <button onClick={handleSubmit} className="submit-button">
-                          Submit
-                        </button>
-                      </div>
-                      {statusMessage && (
-                        <div className="status-message">
-                          <p>{statusMessage}</p>
-                        </div>
-                      )}
-
-                    </div>
+                    <ContactForm />
                     <FooterComponent />
                   </div>
                 </div>

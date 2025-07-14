@@ -8,6 +8,38 @@ const HeaderComponent = ({ smoother }) => {
     const [isMobile, setIsMobile] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    // Function to check scroll position and update header state
+    const checkScrollPosition = () => {
+        const target = document.querySelector('.main-content-container');
+        console.log("ACTIVATED")
+        if (target) {
+            const viewportHeight = window.innerHeight;
+            const rect = target.getBoundingClientRect();
+            const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+            const isTaking80Percent = visibleHeight / viewportHeight >= 0.7;
+            setIsScrolled(isTaking80Percent);
+        }
+    };
+
+    // Check for stored scroll target on mount
+    useEffect(() => {
+        const scrollTarget = sessionStorage.getItem('scrollTarget');
+        if (scrollTarget && smoother) {
+            // Clear the stored target
+            sessionStorage.removeItem('scrollTarget');
+            // Wait for the page to be fully rendered
+            setTimeout(() => {
+                const target = document.querySelector(scrollTarget);
+                if (target) {
+                    smoother.scrollTo(target, true, "top");
+                    // Check scroll position after the scroll animation
+                    setTimeout(checkScrollPosition, 1000);
+                }
+            }, 500);
+        }
+    }, [smoother]);
 
     // Check if the device is mobile
     useEffect(() => {
@@ -24,38 +56,47 @@ const HeaderComponent = ({ smoother }) => {
     }, []);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const target = document.querySelector('.main-content-container');
-
-            if (target) {
-                const viewportHeight = window.innerHeight;
-                const rect = target.getBoundingClientRect();
-
-                const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-                const isTaking80Percent = visibleHeight / viewportHeight >= 0.7;
-                setIsScrolled(isTaking80Percent);
-            }
-        };
-
         // Trigger on load and on scroll
-        handleScroll(); // Initial check
-        window.addEventListener('scroll', handleScroll);
+        checkScrollPosition(); // Initial check
+        window.addEventListener('scroll', checkScrollPosition);
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', checkScrollPosition);
         };
     }, []);
 
 
     const smoothScrollTo = (sectionId) => {
-        if (smoother) {
-            const target = document.querySelector(sectionId);
-            if (target) {
-                // scrollTo(element, smooth, position)
-                smoother.scrollTo(target, true, "top");
-                setMenuOpen(false);
-            }
+        if (window.location.pathname !== "/") {
+            // Store the target section in sessionStorage before navigation
+            sessionStorage.setItem('scrollTarget', sectionId);
+            window.location.href = "/";
+            return;
         }
+
+        if (smoother) {
+            setTimeout(() => {
+                const target = document.querySelector(sectionId);
+                if (target) {
+                    smoother.scrollTo(target, true, "top");
+                    setMenuOpen(false);
+                    // Check scroll position after the scroll animation
+                    setTimeout(checkScrollPosition, 1000);
+                }
+            });
+        }
+    };
+
+    const handleWordmarkClick = (e) => {
+        if (isMobile) {
+            e.preventDefault();
+            setMobileMenuOpen(!mobileMenuOpen);
+        }
+    };
+
+    const handleNavClick = (path) => {
+        setMobileMenuOpen(false);
+        window.location.href = path;
     };
 
     return (
@@ -64,7 +105,7 @@ const HeaderComponent = ({ smoother }) => {
                 className={`header-header-container ${isScrolled ? "scrolled" : ""}`}
             >
                 <div className="wordmark-header">
-                    <a href="/">
+                    <a href="/" onClick={handleWordmarkClick}>
                         <img
                             src={isMobile ? whiteLogo : wordmarkwL}
                             alt="Inflection Wordmark"
@@ -93,14 +134,55 @@ const HeaderComponent = ({ smoother }) => {
                                 <button onClick={() => smoothScrollTo('#services')} className="header-nav-link">Services</button>
                             </li> */}
                             <li>
+                                <button onClick={() => (window.location.href = "/services")} className="header-nav-link">Services</button>
+                            </li>
+                            <li>
                                 <button onClick={() => smoothScrollTo('#about')} className="header-nav-link">About Us</button>
                             </li>
                             <li>
                                 <button onClick={() => smoothScrollTo('#contact')} className="header-nav-link">Contact</button>
                             </li>
+                            <li>
+                                <button
+                                    onClick={() => window.open('https://inflection.addepar.com', '_blank', 'noopener,noreferrer')}
+                                    className="header-nav-link"
+                                >
+                                    Log In
+                                </button>
+                            </li>
+
                         </ul>
                     </nav>
                 </div>
+
+                {/* Mobile Full Screen Menu */}
+                {isMobile && (
+                    <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
+                        <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <nav className="mobile-menu-nav">
+                            <ul className="mobile-menu-list">
+                                <li>
+                                    <button onClick={() => handleNavClick('/')} className="mobile-menu-link">Home</button>
+                                </li>
+                                <li>
+                                    <button onClick={() => handleNavClick('/services')} className="mobile-menu-link">Services</button>
+                                </li>
+                                <li>
+                                    <button
+                                        onClick={() => window.open('https://inflection.addepar.com', '_blank', 'noopener,noreferrer')}
+                                        className="mobile-menu-link"
+                                    >
+                                        Log In
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                )}
             </header>
         </>
     );
