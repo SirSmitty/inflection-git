@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import "./services.css";
 import HeaderComponent from "../../components/header/header"; // Import HeaderComponent
 import FooterComponent from "../../components/footer/footer";
+import ContactForm from "../../components/contact/contact";
 
 const dataSet = [
     {
@@ -534,6 +535,8 @@ const ServicesChart = () => {
                     <div className="chart-container" ref={chartRef}></div> // Keep the pie chart for larger screens
                 )}
             </div>
+
+            <ContactForm />
 
             <FooterComponent />
         </>
