@@ -537,7 +537,7 @@ function App() {
                       <div className='carosel-container'>
                         <Carousel />
                       </div>
-                      <div className='portfolio-container'>
+                      {/* <div className='portfolio-container'>
                         <div className='POI1-container' data-animate='split-text'>
                           <div className='mobile-container'>
                             <div className='mobile-pic-container'>
@@ -622,7 +622,7 @@ function App() {
                             )}
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                       <ContactForm />
                       <FooterComponent />
                     </div>
