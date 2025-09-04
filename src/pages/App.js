@@ -12,8 +12,8 @@ import backgroundjpg from '../assets/BG2.jpg';
 import bottomParalax from '../assets/mainInfo/paralaxBottom.png';
 import homePageHeader from '../assets/homePageHeader.svg';
 import wordmark from '../assets/wordmark.svg';
-import poi1 from '../assets/mainInfo/portfolio/poi1.png';
-import poi2 from '../assets/mainInfo/portfolio/poi2.png';
+// import poi1 from '../assets/mainInfo/portfolio/poi1.png';
+// import poi2 from '../assets/mainInfo/portfolio/poi2.png';
 import logoWhite from '../assets/logos/logoWhite.png';
 import Carousel from '../components/carosel/carousel';
 import ContactForm from '../components/contact/contact';
@@ -28,7 +28,7 @@ function App() {
   const [lowPower, setLowPower] = useState(false)
   const [fadeOut, setFadeOut] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [activeSection, setActiveSection] = useState(null);
+  // const [activeSection, setActiveSection] = useState(null);
   const [isImageLoaded, setImageLoaded] = useState(false);
   const [smoother, setSmoother] = useState(null);
 
@@ -398,35 +398,35 @@ function App() {
     }
   }, [showContent]);
 
-  const toggleDescription = (sectionId) => {
-    setActiveSection((prevSection) => {
-      const isClosing = prevSection === sectionId;
-      const newSection = isClosing ? null : sectionId;
+  // const toggleDescription = (sectionId) => {
+  //   setActiveSection((prevSection) => {
+  //     const isClosing = prevSection === sectionId;
+  //     const newSection = isClosing ? null : sectionId;
 
-      if (isClosing) {
-        // Scroll back to the top of the section after a slight delay
-        setTimeout(() => {
-          const elementId = `${sectionId}-container`;
-          console.log("elementid", elementId);
-          const element = document.querySelector(`.${elementId}`);
-          console.log("element", element);
+  //     if (isClosing) {
+  //       // Scroll back to the top of the section after a slight delay
+  //       setTimeout(() => {
+  //         const elementId = `${sectionId}-container`;
+  //         console.log("elementid", elementId);
+  //         const element = document.querySelector(`.${elementId}`);
+  //         console.log("element", element);
 
-          if (element) {
-            const elementTop = element.getBoundingClientRect().top + window.scrollY;
-            const offset = 50; // Adjust this value as needed
-            window.scrollTo({
-              top: elementTop - offset,
-              behavior: "smooth",
-            });
-          } else {
-            console.log("element not found");
-          }
-        }, 1000); // 100ms delay to allow layout to update
-      }
+  //         if (element) {
+  //           const elementTop = element.getBoundingClientRect().top + window.scrollY;
+  //           const offset = 50; // Adjust this value as needed
+  //           window.scrollTo({
+  //             top: elementTop - offset,
+  //             behavior: "smooth",
+  //           });
+  //         } else {
+  //           console.log("element not found");
+  //         }
+  //       }, 1000); // 100ms delay to allow layout to update
+  //     }
 
-      return newSection;
-    });
-  };
+  //     return newSection;
+  //   });
+  // };
 
 
   // init add for branch commit
@@ -729,7 +729,7 @@ function App() {
                     <div className='carosel-container'>
                       <Carousel />
                     </div>
-                    <div className='portfolio-container'>
+                    {/* <div className='portfolio-container'>
                       <div className='POI1-container' data-animate='split-text'>
                         <div className='mobile-container'>
                           <div className='mobile-pic-container'>
@@ -814,7 +814,7 @@ function App() {
                           )}
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     <ContactForm />
                     <FooterComponent />
                   </div>
