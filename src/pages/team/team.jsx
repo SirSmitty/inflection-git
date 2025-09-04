@@ -6,7 +6,7 @@ import FooterComponent from '../../components/footer/footer';
 import justin from '../../assets/mainInfo/portfolio/poi1.png';
 import katie from '../../assets/mainInfo/portfolio/poi2.png';
 import patrick from '../../assets/mainInfo/portfolio/patrickHayes.jpg';
-import Yvonne from '../../assets/mainInfo/portfolio/Yvonne.jpg';
+import Yvonne from '../../assets/mainInfo/portfolio/Yvonne2.jpg';
 const people = [
     {
         name: 'Justin Kunz',
