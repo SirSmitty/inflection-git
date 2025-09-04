@@ -1,0 +1,495 @@
+/* Base and layout */
+html,
+body {
+    overflow-x: hidden;
+}
+
+.team-fixed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    background-color: #08241c;
+    color: #c5e6e1;
+    z-index: 100;
+}
+
+.team-fixed-header .header-nav-link {
+    color: rgba(197, 230, 225);
+}
+
+.team-fixed-header .header-nav-link:hover {
+    color: rgba(197, 230, 225);
+}
+
+.team-fixed-header .wordmark-header a {
+    filter: invert(99%) sepia(94%) saturate(28%) hue-rotate(52deg) brightness(106%) contrast(100%);
+}
+
+.team-container {
+    background-color: #08241c;
+    color: #c5e6e1;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem 1.25rem 4rem;
+    box-sizing: border-box;
+}
+
+/* Hero */
+.team-hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'GTMI';
+}
+
+.team-title {
+    font-size: clamp(2rem, 4rem, 8rem);
+    letter-spacing: 0.5px;
+    margin: 0 0 0.5rem 0;
+}
+
+.team-wrapper {
+    max-width: 1200px;
+    margin: 2rem auto;
+    width: 100%;
+}
+
+/* Grid */
+.team-grid {
+    display: grid;
+    gap: 5.25rem;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 1024px) {
+    .team-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        /* collapse to 1 column on mobile */
+    }
+}
+
+/* Card */
+.team-card {
+    position: relative;
+    background: #0c2f26;
+    border: 1px solid rgba(197, 230, 225, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+    aspect-ratio: 4 / 3;
+}
+
+.team-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+
+@media (max-width: 1024px) {
+    .team-card {
+        grid-column: span 4;
+    }
+}
+
+@media (max-width: 640px) {
+    .team-card {
+        grid-column: span 4;
+    }
+}
+
+.team-card__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #073229;
+}
+
+.team-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* crops while filling */
+    display: block;
+}
+
+.team-card__footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.9rem 1rem 1.1rem;
+    background: transparent;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 220ms ease, transform 220ms ease;
+    opacity: 1;
+}
+
+/* When bio is showing, hide footer text/scrim */
+.team-card:hover .team-card__footer,
+.team-card:focus-within .team-card__footer {
+    opacity: 0;
+    transform: translateY(6px);
+    /* optional nudge down */
+}
+
+/* add a soft gradient behind the text for readability */
+.team-card__footer::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80%;
+    /* how tall the scrim is */
+    background: linear-gradient(to top,
+            rgba(8, 36, 28, 0.9) 10%,
+            rgba(8, 36, 28, 0.55) 60%,
+            rgba(8, 36, 28, 0) 100%);
+    z-index: -1;
+}
+
+.team-card__name {
+    font-size: 2rem;
+    margin: 0 0 0.15rem 0;
+    font-family: 'GTMI';
+    color: white;
+}
+
+.team-card__title {
+    margin: 0;
+    opacity: 0.85;
+    font-size: 0.975rem;
+}
+
+.team-card__bio {
+    position: absolute;
+    inset: 0;
+    /* cover full card */
+    transform: translateY(100%);
+    transition: transform 350ms ease, opacity 200ms ease, visibility 0s linear 200ms;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(8, 36, 28, 0.98), rgba(8, 36, 28, 0.92) 60%, rgba(8, 36, 28, 0.75));
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: flex-start;
+    z-index: 3;
+    overflow: hidden;
+    /* hide any child overflow when closed */
+}
+
+.team-card:hover .team-card__bio,
+.team-card:focus-within .team-card__bio {
+    transform: translateY(0%);
+    opacity: 1;
+    visibility: visible;
+    /* show on hover/focus */
+    pointer-events: auto;
+    transition: transform 350ms ease, opacity 200ms ease;
+}
+
+.team-card__bio-content {
+    height: 100%;
+    /* <-- was max-height */
+    box-sizing: border-box;
+    /* include padding in that 100% */
+    padding: 1.25rem 1.25rem 1.15rem;
+    overflow: hidden;
+    /* closed state: no scrollbars */
+    white-space: pre-line;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+}
+
+.team-card:hover .team-card__bio-content,
+.team-card:focus-within .team-card__bio-content {
+    overflow: auto;
+    /* enable scroll only when open */
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    /* reduces layout nudge on some browsers */
+}
+
+.team-card__bio-content h4 {
+    margin: 0 0 0.35rem 0;
+    font-size: 1rem;
+}
+
+.team-card__bio-content p {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.35rem;
+    opacity: 0.95;
+}
+
+/* Bottom panel: Joint Venture copy */
+.joint-venture-TOC {
+    margin: 0 auto;
+    background: #203a31;
+    border-radius: 18px;
+    padding: 2.5rem;
+    margin-top: 5rem;
+}
+
+.joint-venture-TOC h2 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: clamp(1rem, 2.5rem, 5rem);
+    font-family: 'GTMI';
+}
+
+.joint-venture-TOC p {
+    margin: 0 0 1.25rem 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    opacity: 0.85;
+}
+
+.jv-roles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    background-color: #08241c;
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+@media (max-width: 800px) {
+    .jv-roles {
+        grid-template-columns: 1fr;
+    }
+}
+
+.jv-roles h3 {
+    margin: 2rem 0 0.35rem;
+    font-size: 1.05rem;
+}
+
+.jv-roles ul {
+    margin: 0 0 0.85rem 1.1rem;
+    padding: 0;
+}
+
+.jv-roles li {
+    margin-bottom: 0.35rem;
+    line-height: 1.35rem;
+    opacity: 0.65;
+}
+
+/* Optional: subtle entrance animation for the page content */
+.team-container {
+    animation: team-fade-in 400ms ease both;
+}
+
+@keyframes team-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Desktop/tablet only: fade footer on hover/focus */
+@media (hover: hover) and (min-width: 769px) {
+
+    .team-card:hover .team-card__footer,
+    .team-card:focus-within .team-card__footer {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+
+/* Mobile: always keep footer visible */
+@media (max-width: 768px) {
+    .team-card__footer {
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto;
+        /* ensure clickable text if needed */
+    }
+}
+
+.jv-col h3:first-of-type {
+    margin-top: 0;
+}
+
+/* ===== Mobile layout overrides (<=768px) ===== */
+@media (max-width: 768px) {
+
+    .team-container {
+        padding: 0rem;
+        gap: 0;
+    }
+
+    .team-wrapper {
+        margin: 0;
+    }
+
+    .team-grid {
+        padding: 2rem;
+    }
+
+    /* Card becomes a normal stacked box, not an overlay composition */
+    .team-card {
+        aspect-ratio: auto;
+        /* let content define height */
+        display: flex;
+        flex-direction: column;
+        border-radius: 16px;
+        overflow: hidden;
+        background: none;
+        border: none;
+        box-shadow: none;
+    }
+
+    .team-card:hover {
+        box-shadow: none;
+        translate: none;
+    }
+
+    /* Image sits at the top in normal flow */
+    .team-card__media {
+        position: static;
+        /* <-- was absolute */
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        z-index: 0;
+        background: none;
+
+    }
+
+    .team-card__media img {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Title BELOW the photo, centered, no scrim */
+    .team-card__footer {
+        position: static;
+        /* <-- was absolute */
+        padding: 1rem 0 .25rem;
+        /* spacing under image */
+        background: transparent;
+        text-align: center;
+        pointer-events: auto;
+        opacity: 1;
+        transform: none;
+    }
+
+    .team-card__footer::before {
+        /* remove gradient on mobile */
+        content: none;
+    }
+
+    .team-card__name {
+        font-size: 2rem;
+        /* match your mobile design */
+        margin: 0 0 .35rem 0;
+    }
+
+    .team-card__title {
+        font-size: 1rem;
+        opacity: .9;
+        margin: 0 0 .5rem 0;
+    }
+
+    /* Hide the desktop hover overlay on mobile — we use accordion instead */
+    .team-card__bio {
+        display: none;
+    }
+
+    /* Accordion sits BETWEEN title and button */
+    .mobile-bio {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: max-height 350ms ease, opacity 220ms ease, transform 220ms ease;
+        margin: 0 0 .5rem 0;
+        /* space above the button */
+    }
+
+    .mobile-bio.open {
+        max-height: 65vh;
+        opacity: 1;
+        transform: translateY(0);
+        border: 1px solid rgba(197, 230, 225, 0.15);
+        border-radius: 12px;
+        background: linear-gradient(to top, rgba(8, 36, 28, 0.98), rgba(8, 36, 28, 0.92) 60%, rgba(8, 36, 28, 0.75));
+    }
+
+    .mobile-bio__content {
+        padding: 1rem 1.1rem 1.15rem;
+        max-height: 55vh;
+        overflow: auto;
+        white-space: pre-line;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        scrollbar-gutter: stable;
+    }
+
+    /* Button sits BELOW the accordion, centered */
+    .read-bio-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 12px;
+        width: 100%;
+        position: static;
+        /* ensure it doesn’t overlay */
+        z-index: 0;
+        /* keep under nothing */
+    }
+
+    .read-bio-button button {
+        width: min(420px, 50%);
+        background: transparent;
+        color: #cbe9e3;
+        border: 1px solid #cbe9e3;
+        padding: 12px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .joint-venture-TOC {
+        padding: 1.5rem;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    .joint-venture-TOC h2 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    /* .joint-venture-TOC p {
+        font-size: 0.75rem;
+    } */
+
+    .jv-roles {
+        padding: 0.5rem;
+        gap: 0;
+    }
+
+}
