@@ -1,6 +1,6 @@
 import React from 'react'
-import PDFdisc1 from './ADVpt2A.pdf';
-import PDFdisc2 from './CRSForm.pdf';
+import PDFdisc1 from './ADVpt3.pdf';
+import PDFdisc2 from './CRSForm2.pdf';
 import './footer.css';
 import bg from '../../assets/footerbg.jpg'
 
