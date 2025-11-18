@@ -6,6 +6,7 @@ import FooterComponent from '../../components/footer/footer';
 import justin from '../../assets/mainInfo/portfolio/poi1.png';
 import katie from '../../assets/mainInfo/portfolio/poi2.png';
 import patrick from '../../assets/mainInfo/portfolio/patrickHayes.jpg';
+import sophia from '../../assets/mainInfo/portfolio/SophiaMura.png';
 import Yvonne from '../../assets/mainInfo/portfolio/Yvonne2.jpg';
 const people = [
     {
@@ -43,6 +44,17 @@ Katie graduated with a BA in Political Science and Spanish from College of the H
     Patrick conducts due diligence and monitors the activities of sub-advisers, third-party managers, and relevant service providers, and will assist with matters before the Securities and Exchange Commission, Commodity Futures Trading Commission, Department of Justice, Financial Industry Regulatory Authority, North American Securities Administrators Association, as well as before state securities commissions, attorneys general and local authorities.
     
     Patrick is a Magna cum laude graduate from the University of Notre Dame with a Bachelor of Arts in English.  He earned his J.D. from the University of Cincinnati College of Law, where he was inducted into the Order of the Barristers for outstanding ability in appellate advocacy.  He is also the immediate Past President of the University of Cincinnati Law Alumni Association and a graduate of the Class 8 of the Cincinnati USA Regional Chamber’s C-Change Leadership Program.`
+    },
+    {
+        name: 'Sophia Mura',
+        title: 'Client Expierence Associate',
+        headshot: sophia,
+        bio: `<span style="font-family:'GTMI'; font-weight:bold;">Sophia Mura</span> is a Client Experience Associate at Inflection Capital Management, where she supports the partners in managing strategic client relationships, business strategy, and operations.
+    
+    She began her career at BlackRock on the Americas Institutional Business team, where she spent two years developing deep expertise in
+ relationship management and asset allocation. In this role, she worked with institutional investors including family offices, foundations, endowments, and healthcare systems to deliver tailored investment solutions across equities, fixed income, real estate,
+ private equity, and hedge funds.  While at BlackRock, Sophia helped lead the Young Allocators group, fostering connections among emerging leaders in the institutional investing space. She was also an active member of BlackRock’s Financial Inclusion Team, partnering
+ with Bay Area foundations to advance financial literacy initiatives. `
     },
     {
         name: 'Yvonne Freeman',
