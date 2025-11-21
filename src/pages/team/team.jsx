@@ -6,7 +6,7 @@ import FooterComponent from '../../components/footer/footer';
 import justin from '../../assets/mainInfo/portfolio/poi1.png';
 import katie from '../../assets/mainInfo/portfolio/poi2.png';
 import patrick from '../../assets/mainInfo/portfolio/patrickHayes.jpg';
-import sophia from '../../assets/mainInfo/portfolio/SophiaMura.png';
+import sophia from '../../assets/mainInfo/portfolio/SOPHIA.jpg';
 import Yvonne from '../../assets/mainInfo/portfolio/Yvonne2.jpg';
 const people = [
     {
@@ -51,10 +51,9 @@ Katie graduated with a BA in Political Science and Spanish from College of the H
         headshot: sophia,
         bio: `<span style="font-family:'GTMI'; font-weight:bold;">Sophia Mura</span> is a Client Experience Associate at Inflection Capital Management, where she supports the partners in managing strategic client relationships, business strategy, and operations.
     
-    She began her career at BlackRock on the Americas Institutional Business team, where she spent two years developing deep expertise in
- relationship management and asset allocation. In this role, she worked with institutional investors including family offices, foundations, endowments, and healthcare systems to deliver tailored investment solutions across equities, fixed income, real estate,
- private equity, and hedge funds.  While at BlackRock, Sophia helped lead the Young Allocators group, fostering connections among emerging leaders in the institutional investing space. She was also an active member of BlackRock’s Financial Inclusion Team, partnering
- with Bay Area foundations to advance financial literacy initiatives. `
+    She began her career at BlackRock on the Americas Institutional Business team, where she spent two years developing deep expertise in relationship management and asset allocation. In this role, she worked with institutional investors including family offices, foundations, endowments, and healthcare systems to deliver tailored investment solutions across equities, fixed income, real estate, private equity, and hedge funds.  While at BlackRock, Sophia helped lead the Young Allocators group, fostering connections among emerging leaders in the institutional investing space. She was also an active member of BlackRock’s Financial Inclusion Team, partnering with Bay Area foundations to advance financial literacy initiatives.
+ 
+ Sophia holds a BA in Public Health and Public Policy from the University of California, Berkeley.  `
     },
     {
         name: 'Yvonne Freeman',

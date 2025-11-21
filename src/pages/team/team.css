@@ -145,6 +145,7 @@ body {
     object-fit: cover;
     /* crops while filling */
     display: block;
+    aspect-ratio: 5/4;
 }
 
 .team-card__footer {
