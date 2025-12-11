@@ -28,28 +28,28 @@ const Carousel = () => {
             image: beach,
             title: (
                 <>
-                    Establishing Clear <span style={{ fontFamily: 'GTMI' }}>Priorities</span>
+                    The Inflection  <span style={{ fontFamily: 'GTMI' }}>Client Experience</span>
                 </>
             ),
-            description: (<>Relationships are at the core of our business. We start by listening to understand your family&#39;s goals and working with you to develop wealth management solutions that meet your specific needs, communicating clearly and educating you every step of the way. </>),
+            description: (<>Our 25+ years spent advising single-family offices, foundations, and institutional allocators shape everything we do. We bring that same level of rigorous risk management and discipline directly to our clients. Clarity sits at the center of the relationship: transparent fees, intuitive reporting, and education tailored to your needs. Our philosophy is simple—bring order and intention to the complexity that comes with meaningful wealth. </>),
         },
         {
             image: bridge,
             title: (
                 <>
-                    Building a <span style={{ fontFamily: 'GTMI' }}>Strategic Path Forward</span>
+                    Built for  <span style={{ fontFamily: 'GTMI' }}>Modern Wealth</span>
                 </>
             ),
-            description: (<>At the foundation of asset protection, we integrate estate planning, tax strategies and advanced investment solutions in a clear manner that is focused on your best interests.</>),
+            description: (<>Our model is intentionally adaptable. We can partner around a wealth transition phase, steward an entire portfolio, or coordinate the full architecture—tax, estate, philanthropy, governance, and investment strategy—as your needs evolve. There is no one-size-fits-all approach; each relationship is designed around where you are today and where you’re headed next. </>),
         },
         {
             image: farm,
             title: (
                 <>
-                    Generational <span style={{ fontFamily: 'GTMI' }}>Stewardship</span>
+                    Investment<span style={{ fontFamily: 'GTMI' }}>Philosophy</span>
                 </>
             ),
-            description: (<>We are dedicated to refining your plan over time, supporting your family&#39;s legacy and long-term well-being.</>),
+            description: (<>Inflection centers portfolios around partnering selectively with boutique managers who demonstrate alignment, discipline, and long-term thinking—rather than relying on top-down model portfolios or product-led allocations.</>),
         },
         {
             image: Abstraction,
@@ -58,7 +58,7 @@ const Carousel = () => {
                     Alignment of <span style={{ fontFamily: 'GTMI' }}>Ownership</span>
                 </>
             ),
-            description: (<>We believe our people are our biggest assets. By having a highly engaged and aligned team, relationships will avoid disruption and be able to flourish. This is why employees of Inflection have the opportunity to participate in the equity upside of our business, which reinforces stewardship of your legacy and ours.</>),
+            description: (<>Every family reaches an inflection point-where wealth becomes complex and legacy structures are no longer compatible. At Inflection, we integrate investments with tax strategy, estate planning, philanthropy, governance, and next generation stewardship-turning a fragmented financial world into one cohesive ecosystem. As a partner-owned firm, our incentives remain fully aligned with yours across generations. </>),
         },
     ], []);
 

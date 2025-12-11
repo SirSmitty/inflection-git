@@ -64,13 +64,37 @@ body {
     display: grid;
     gap: 5.25rem;
     grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
 }
 
-@media (max-width: 1024px) {
+.team-grid>*:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: calc((100% / 2) - 2.625rem);
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        /* This is the real fix */
+    }
+
+    .team-grid>*:last-child {
+        grid-column: auto;
+        /* clears the desktop override */
+        max-width: 100%;
+        width: 100%;
+        justify-self: center;
+        /* clean centering */
+    }
+}
+
+/* @media (max-width: 1024px) {
     .team-grid {
         grid-template-columns: repeat(8, 1fr);
     }
-}
+} */
 
 @media (max-width: 768px) {
     .team-grid {
@@ -96,17 +120,17 @@ body {
 }
 
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
     .team-card {
         grid-column: span 4;
     }
-}
+} */
 
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
     .team-card {
         grid-column: span 4;
     }
-}
+} */
 
 .team-card__media {
     position: absolute;
@@ -121,6 +145,7 @@ body {
     object-fit: cover;
     /* crops while filling */
     display: block;
+    aspect-ratio: 5/4;
 }
 
 .team-card__footer {
