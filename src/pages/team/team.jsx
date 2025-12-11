@@ -47,7 +47,7 @@ Katie graduated with a BA in Political Science and Spanish from College of the H
     },
     {
         name: 'Sophia Mura',
-        title: 'Client Expierence Associate',
+        title: 'Client Experience Associate',
         headshot: sophia,
         bio: `<span style="font-family:'GTMI'; font-weight:bold;">Sophia Mura</span> is a Client Experience Associate at Inflection Capital Management, where she supports the partners in managing strategic client relationships, business strategy, and operations.
     
